@@ -1,0 +1,359 @@
+/* ==================== Dashboard Page Styles ==================== */
+
+.page {
+  min-height: 100vh;
+  background-color: var(--color-bg-primary);
+  padding: 1.5rem;
+}
+
+.container {
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+/* ==================== Header ==================== */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.headerLeft {
+  flex: 1;
+}
+
+.title {
+  font-size: 1.875rem;
+  font-weight: bold;
+  color: var(--color-text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.userName {
+  color: var(--color-secondary);
+}
+
+.subtitle {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+}
+
+.headerRight {
+  flex-shrink: 0;
+}
+
+.dateTag {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+/* ==================== Stats Grid ==================== */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+/* بطاقة الإحصائيات */
+.statCard {
+  background-color: var(--color-bg-card);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-border);
+  padding: 1.25rem;
+  transition: var(--transition);
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+  box-shadow: var(--shadow-card);
+}
+
+.statCard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.statCardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.statIcon {
+  font-size: 1.5rem;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-text-muted);
+}
+
+.statValue {
+  font-size: 1.875rem;
+  font-weight: bold;
+  color: var(--color-text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.statSub {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 0.75rem;
+}
+
+.statBar {
+  height: 0.25rem;
+  background-color: var(--color-bg-muted);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.statBarFill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.3s ease;
+}
+
+/* ==================== Bottom Grid ==================== */
+.bottomGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .bottomGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==================== Card ==================== */
+.card {
+  background-color: var(--color-bg-card);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-border);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-card);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.cardTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.viewAll {
+  font-size: 0.75rem;
+  color: var(--color-secondary);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.viewAll:hover {
+  color: var(--color-secondary-dark);
+  text-decoration: underline;
+}
+
+/* ==================== Work Orders List ==================== */
+.woList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.woRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.woRow:last-child {
+  border-bottom: none;
+}
+
+.woTitle {
+  font-size: 0.875rem;
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+.woTags {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  background-color: var(--color-bg-muted);
+  color: var(--color-text-secondary);
+}
+
+/* ==================== Quick Actions Grid ==================== */
+.quickGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+}
+
+.quickBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 0.75rem;
+  background-color: var(--color-bg-muted);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: var(--transition);
+}
+
+.quickBtn:hover {
+  background-color: var(--color-secondary-light);
+  color: var(--color-secondary-dark);
+  transform: translateY(-1px);
+}
+
+.quickBtn span:first-child {
+  font-size: 1rem;
+}
+
+/* ==================== Badge ==================== */
+.badge {
+  background-color: var(--color-danger-light);
+  color: var(--color-danger);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999px;
+  margin-left: 0.5rem;
+}
+
+/* ==================== Skeleton Loading ==================== */
+.skeletonGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.skeleton {
+  height: 140px;
+  background: linear-gradient(90deg, var(--color-bg-muted) 25%, #e2e6ea 50%, var(--color-bg-muted) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-card);
+}
+
+.skeletonRow {
+  height: 60px;
+  background: linear-gradient(90deg, var(--color-bg-muted) 25%, #e2e6ea 50%, var(--color-bg-muted) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-md);
+  margin-bottom: 0.5rem;
+}
+
+.loadingRows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ==================== Empty State ==================== */
+.emptyState {
+  text-align: center;
+  padding: 3rem;
+  color: var(--color-text-muted);
+}
+
+.emptyState span {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.emptyText {
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+}
+.root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--color-bg-primary);
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  position: relative;
+}
+
+.main {
+  flex: 1;
+  overflow: auto;
+  min-width: 0;
+  background-color: var(--color-bg-primary);
+  transition: margin 0.3s ease;
+}
+
+.headerWrapper {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  transition: margin 0.3s ease;
+}
+
+.footerWrapper {
+  transition: margin 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .main,
+  .headerWrapper,
+  .footerWrapper {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}

@@ -1,0 +1,220 @@
+/* src/styles/pages/maintenance-requests-edit.module.css */
+
+/* ==================== Maintenance Requests Edit Page Styles ==================== */
+
+.page {
+  min-height: 100vh;
+  background-color: var(--color-bg-primary);
+  padding: 1.5rem;
+}
+
+.container {
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--color-text-primary);
+}
+
+.titleIcon {
+  display: inline-block;
+  width: 1.75rem;
+  height: 1.75rem;
+  margin-left: 0.5rem;
+  color: var(--color-secondary);
+  vertical-align: middle;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin-top: 0.25rem;
+}
+
+.cancelButton {
+  background-color: var(--color-bg-muted);
+  color: var(--color-text-secondary);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-dark);
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cancelButton:hover {
+  background-color: var(--color-border);
+}
+
+/* Form */
+.formContainer {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.formLabel {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.formInput {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-border-dark);
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-card);
+  color: var(--color-text-primary);
+  font-size: 0.875rem;
+  transition: var(--transition);
+}
+
+.formInput:focus {
+  outline: none;
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 0 2px var(--color-secondary-light);
+}
+
+.formSelect {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-border-dark);
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-card);
+  color: var(--color-text-primary);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.formSelect:focus {
+  outline: none;
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 0 2px var(--color-secondary-light);
+}
+
+.formTextarea {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-border-dark);
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-card);
+  color: var(--color-text-primary);
+  font-size: 0.875rem;
+  transition: var(--transition);
+  resize: vertical;
+  min-height: 80px;
+}
+
+.formTextarea:focus {
+  outline: none;
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 0 2px var(--color-secondary-light);
+}
+
+/* Form Actions */
+.formActions {
+  display: flex;
+  gap: 0.75rem;
+  grid-column: span 2;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.saveButton {
+  background-color: var(--color-secondary);
+  color: white;
+  font-weight: bold;
+  padding: 0.5rem 1.5rem;
+  border-radius: var(--radius-lg);
+  border: none;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.saveButton:hover {
+  background-color: var(--color-secondary-dark);
+}
+
+.saveButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Error Message */
+.errorMessage {
+  background-color: var(--color-danger-light);
+  border: 1px solid var(--color-danger);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.errorText {
+  color: var(--color-danger);
+  font-size: 0.875rem;
+}
+
+/* Loading State */
+.loadingState {
+  text-align: center;
+  padding: 3rem;
+  color: var(--color-text-muted);
+  background-color: var(--color-bg-card);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .page {
+    padding: 1rem;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .formActions {
+    grid-column: span 1;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

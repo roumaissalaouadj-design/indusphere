@@ -1,0 +1,256 @@
+/* ==================== Sidebar Styles ==================== */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  background-color: var(--color-primary);
+  color: var(--color-text-white);
+  transition: width 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* RTL — اليمين */
+.sidebarRTL {
+  right: 0;
+  left: auto;
+}
+
+/* LTR — اليسار */
+.sidebarLTR {
+  left: 0;
+  right: auto;
+}
+
+.sidebarExpanded  { width: 280px; }
+.sidebarCollapsed { width: 72px; }
+
+/* Overlay للموبايل */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
+}
+
+.overlayVisible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Toggle Button */
+.toggleBtn {
+  position: absolute;
+  top: 1rem;
+  width: 24px;
+  height: 24px;
+  background-color: var(--color-secondary);
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  transition: var(--transition);
+  z-index: 10;
+}
+
+/* زر الطي في RTL يخرج من الجهة اليسرى للـ Sidebar */
+.toggleBtnRTL {
+  left: -12px;
+  right: auto;
+}
+
+/* زر الطي في LTR يخرج من الجهة اليمنى للـ Sidebar */
+.toggleBtnLTR {
+  right: -12px;
+  left: auto;
+}
+
+.toggleBtn:hover {
+  background-color: var(--color-secondary-dark);
+  transform: scale(1.05);
+}
+
+/* Logo */
+.logo {
+  padding: 1.5rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.logoIcon { font-size: 2rem; }
+
+.logoText {
+  font-size: 1.25rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.logoAccent { color: var(--color-secondary); }
+
+/* Navigation */
+.nav {
+  flex: 1;
+  padding: 0 0.75rem;
+}
+
+.section { margin-bottom: 1.5rem; }
+
+.sectionTitle {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 0.5rem;
+  transition: opacity 0.2s ease;
+}
+
+.sectionTitleHidden {
+  opacity: 0;
+  visibility: hidden;
+  height: 0;
+  padding: 0;
+  margin: 0;
+}
+
+/* Menu Item */
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 0.75rem;
+  border-radius: var(--radius-md);
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: var(--transition);
+  margin-bottom: 0.25rem;
+  position: relative;
+}
+
+.menuItem:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.menuItemActive {
+  background-color: var(--color-secondary);
+  color: white;
+}
+
+.menuItemActive:hover {
+  background-color: var(--color-secondary-dark);
+}
+
+.menuIcon {
+  font-size: 1.25rem;
+  min-width: 24px;
+  text-align: center;
+}
+
+.menuLabel {
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+
+.menuLabelHidden {
+  opacity: 0;
+  visibility: hidden;
+  width: 0;
+}
+
+/* Tooltip — RTL يظهر على اليسار، LTR على اليمين */
+.menuItem[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--color-primary-dark);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  white-space: nowrap;
+  z-index: 100;
+  pointer-events: none;
+}
+
+/* Tooltip RTL — يظهر على اليسار */
+.menuItemRTL[data-tooltip]:hover::after {
+  right: 100%;
+  left: auto;
+  margin-right: 0.5rem;
+  margin-left: 0;
+}
+
+/* Tooltip LTR — يظهر على اليمين */
+.menuItem:not(.menuItemRTL)[data-tooltip]:hover::after {
+  left: 100%;
+  right: auto;
+  margin-left: 0.5rem;
+  margin-right: 0;
+}
+
+/* Bottom */
+.bottom {
+  padding: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: auto;
+}
+
+.logoutBtn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 0.75rem;
+  background: none;
+  border: none;
+  border-radius: var(--radius-md);
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 0.875rem;
+}
+
+.logoutBtn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .sidebarRTL {
+    transform: translateX(100%);
+    transition: transform 0.3s ease, width 0.3s ease;
+  }
+
+  .sidebarLTR {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease, width 0.3s ease;
+  }
+
+  .sidebarMobileOpen {
+    transform: translateX(0) !important;
+  }
+
+  .sidebarExpanded,
+  .sidebarCollapsed {
+    width: 280px;
+  }
+
+  .toggleBtn { display: none; }
+}

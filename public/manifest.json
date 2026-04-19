@@ -1,0 +1,29 @@
+{
+  "name": "Indusphere",
+  "short_name": "Indusphere",
+  "description": "نظام متكامل لإدارة مصانع الأسمنت",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1ABC9C",
+  "icons": [
+    {
+      "src": "/indusphere-logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

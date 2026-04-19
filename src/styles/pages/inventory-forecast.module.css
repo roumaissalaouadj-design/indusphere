@@ -1,0 +1,242 @@
+/* src/styles/pages/inventory-forecast.module.css */
+
+.page {
+  min-height: 100vh;
+  background-color: var(--color-bg-primary);
+  padding: 1.5rem;
+}
+
+.container {
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--color-text-primary);
+}
+
+.titleIcon {
+  display: inline-block;
+  width: 1.75rem;
+  height: 1.75rem;
+  margin-left: 0.5rem;
+  color: var(--color-secondary);
+  vertical-align: middle;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin-top: 0.25rem;
+}
+
+/* Stats Grid */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.statCard {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 1rem;
+  text-align: center;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.statValue {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--color-text-primary);
+}
+
+.statValueRed {
+  color: var(--color-danger);
+}
+
+.statValueOrange {
+  color: var(--color-warning);
+}
+
+.statValueGreen {
+  color: var(--color-success);
+}
+
+/* Table */
+.tableContainer {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+}
+
+.tableHeader {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.tableHeaderCell {
+  text-align: right;
+  padding: 0.75rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.tableRow {
+  border-bottom: 1px solid var(--color-border);
+  transition: var(--transition);
+}
+
+.tableRow:hover {
+  background-color: var(--color-bg-muted);
+}
+
+.tableCell {
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+
+.cellCode {
+  color: var(--color-text-muted);
+  font-family: monospace;
+}
+
+.cellName {
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+.quantityLow {
+  color: var(--color-danger);
+  font-weight: bold;
+}
+
+/* Risk Badge */
+.riskBadge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.riskHigh {
+  background-color: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+}
+
+.riskMedium {
+  background-color: rgba(241, 196, 15, 0.1);
+  color: #f1c40f;
+}
+
+.riskLow {
+  background-color: rgba(46, 204, 113, 0.1);
+  color: #2ecc71;
+}
+
+.recommendation {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+}
+
+/* Info Box */
+.infoBox {
+  display: flex;
+  gap: 1rem;
+  background-color: var(--color-bg-muted);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.infoIcon {
+  font-size: 1.5rem;
+}
+
+.infoContent {
+  flex: 1;
+}
+
+.infoTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.infoText {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+/* Error Message */
+.errorMessage {
+  background-color: var(--color-danger-light);
+  border: 1px solid var(--color-danger);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.errorText {
+  color: var(--color-danger);
+  font-size: 0.875rem;
+}
+
+/* Loading & Empty States */
+.loadingState {
+  text-align: center;
+  padding: 3rem;
+  color: var(--color-text-muted);
+}
+
+.emptyState {
+  text-align: center;
+  padding: 3rem;
+  color: var(--color-text-muted);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .page {
+    padding: 1rem;
+  }
+
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .header {
+    flex-direction: column;
+  }
+}

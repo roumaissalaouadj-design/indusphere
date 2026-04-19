@@ -1,0 +1,66 @@
+/* ===== Table Container ===== */
+.wrapper {
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* ===== Header ===== */
+.thead tr {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.th {
+  text-align: right;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  padding: var(--spacing-sm) var(--spacing-md);
+  white-space: nowrap;
+}
+
+/* ===== Body ===== */
+.tr {
+  border-bottom: 1px solid rgba(31, 41, 55, 0.5);
+  transition: var(--transition);
+}
+
+.tr:hover {
+  background-color: rgba(31, 41, 55, 0.3);
+}
+
+.tr:last-child {
+  border-bottom: none;
+}
+
+.td {
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: 0.875rem;
+  color: var(--color-text-primary);
+}
+
+.tdMuted {
+  color: var(--color-text-secondary);
+}
+
+/* ===== Empty State ===== */
+.empty {
+  text-align: center;
+  color: var(--color-text-muted);
+  padding: 3rem;
+  font-size: 0.875rem;
+}
+
+/* ===== Loading ===== */
+.loading {
+  text-align: center;
+  color: var(--color-text-muted);
+  padding: 3rem;
+  font-size: 0.875rem;
+}

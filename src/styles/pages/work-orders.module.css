@@ -1,0 +1,410 @@
+/* ==================== Work Orders Page Styles ==================== */
+
+.page {
+  min-height: 100vh;
+  background-color: var(--color-bg-primary);
+  padding: 1.5rem;
+}
+
+.container {
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--color-text-primary);
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin-top: 0.25rem;
+}
+
+.addButton {
+  background-color: var(--color-secondary);
+  color: white;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-lg);
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 0.875rem;
+}
+
+.addButton:hover {
+  background-color: var(--color-secondary-dark);
+}
+
+/* Error Message */
+.errorMessage {
+  background-color: var(--color-danger-light);
+  border: 1px solid var(--color-danger);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.errorText {
+  color: var(--color-danger);
+  font-size: 0.875rem;
+}
+
+/* Form */
+.formContainer {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.formTitle {
+  color: var(--color-text-primary);
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.formFieldFull {
+  grid-column: span 2;
+}
+
+.formLabel {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.formInput {
+  width: 100%;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border-dark);
+  border-radius: var(--radius-lg);
+  padding: 0.5rem 0.75rem;
+  color: var(--color-text-primary);
+  font-size: 0.875rem;
+  transition: var(--transition);
+}
+
+.formInput:focus {
+  outline: none;
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 0 2px var(--color-secondary-light);
+}
+
+.formSelect {
+  width: 100%;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border-dark);
+  border-radius: var(--radius-lg);
+  padding: 0.5rem 0.75rem;
+  color: var(--color-text-primary);
+  font-size: 0.875rem;
+  transition: var(--transition);
+}
+
+.formSelect:focus {
+  outline: none;
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 0 2px var(--color-secondary-light);
+}
+
+.formTextarea {
+  width: 100%;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border-dark);
+  border-radius: var(--radius-lg);
+  padding: 0.5rem 0.75rem;
+  color: var(--color-text-primary);
+  font-size: 0.875rem;
+  resize: vertical;
+  transition: var(--transition);
+}
+
+.formTextarea:focus {
+  outline: none;
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 0 2px var(--color-secondary-light);
+}
+
+.radioGroup {
+  display: flex;
+  gap: 1rem;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.formActions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-end;
+}
+
+.saveButton {
+  background-color: var(--color-secondary);
+  color: white;
+  font-weight: bold;
+  padding: 0.5rem 1.5rem;
+  border-radius: var(--radius-lg);
+  border: none;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: var(--transition);
+}
+
+.saveButton:hover {
+  background-color: var(--color-secondary-dark);
+}
+
+.saveButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cancelButton {
+  background-color: var(--color-bg-muted);
+  color: var(--color-text-secondary);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-dark);
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: var(--transition);
+}
+
+.cancelButton:hover {
+  background-color: var(--color-border-dark);
+}
+
+/* Autocomplete Suggestions */
+.suggestions {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border-dark);
+  border-top: none;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  box-shadow: var(--shadow-card-hover);
+  z-index: 50;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.suggestionItem {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.suggestionItem:hover {
+  background-color: var(--color-bg-muted);
+  color: var(--color-secondary);
+}
+
+/* Table */
+.tableContainer {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tableHeader {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.tableHeaderCell {
+  text-align: right;
+  padding: 0.75rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  background-color: var(--color-bg-muted);
+}
+
+.tableRow {
+  border-bottom: 1px solid var(--color-border);
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.tableRow:hover {
+  background-color: var(--color-bg-muted);
+}
+
+.tableCell {
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+
+.cellTitle {
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+/* Priority Badges */
+.priorityBadge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid;
+}
+
+.priorityLow {
+  background-color: var(--color-success-light);
+  color: var(--color-success);
+  border-color: rgba(26, 188, 156, 0.3);
+}
+
+.priorityMedium {
+  background-color: var(--color-info-light);
+  color: var(--color-info);
+  border-color: rgba(52, 152, 219, 0.3);
+}
+
+.priorityHigh {
+  background-color: var(--color-warning-light);
+  color: var(--color-accent-dark);
+  border-color: rgba(241, 196, 15, 0.3);
+}
+
+.priorityCritical {
+  background-color: var(--color-danger-light);
+  color: var(--color-danger);
+  border-color: rgba(231, 76, 60, 0.3);
+}
+
+/* Status Badges */
+.statusBadge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid;
+}
+
+.statusOpen {
+  background-color: var(--color-info-light);
+  color: var(--color-info);
+  border-color: rgba(52, 152, 219, 0.3);
+}
+
+.statusAssigned {
+  background-color: rgba(168, 85, 247, 0.1);
+  color: #a855f7;
+  border-color: rgba(168, 85, 247, 0.3);
+}
+
+.statusAcknowledged {
+  background-color: rgba(6, 182, 212, 0.1);
+  color: #06b6d4;
+  border-color: rgba(6, 182, 212, 0.3);
+}
+
+.statusInProgress {
+  background-color: var(--color-warning-light);
+  color: var(--color-accent-dark);
+  border-color: rgba(241, 196, 15, 0.3);
+}
+
+.statusDone {
+  background-color: var(--color-success-light);
+  color: var(--color-success);
+  border-color: rgba(26, 188, 156, 0.3);
+}
+
+.statusCancelled {
+  background-color: var(--color-danger-light);
+  color: var(--color-danger);
+  border-color: rgba(231, 76, 60, 0.3);
+}
+
+/* Warning Text */
+.warningText {
+  color: var(--color-accent-dark);
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+/* Loading & Empty States */
+.loadingState {
+  text-align: center;
+  padding: 3rem;
+  color: var(--color-text-muted);
+}
+
+.emptyState {
+  text-align: center;
+  padding: 3rem;
+  color: var(--color-text-muted);
+}
+
+/* Actions Cell */
+.actionsCell {
+  padding: 0.75rem 1rem;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .page {
+    padding: 1rem;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .formFieldFull {
+    grid-column: span 1;
+  }
+
+  .tableContainer {
+    overflow-x: auto;
+  }
+
+  .table {
+    min-width: 600px;
+  }
+}

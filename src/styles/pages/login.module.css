@@ -1,0 +1,146 @@
+/* src/styles/pages/login.module.css */
+.card {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Email Input Wrapper */
+.inputWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #1ABC9C;
+  z-index: 1;
+  pointer-events: none;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+:global([dir="rtl"]) .inputIcon {
+  left: auto;
+  right: 1rem;
+}
+
+.inputField {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.75rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  background: white;
+  color: #1e293b;
+}
+
+:global([dir="rtl"]) .inputField {
+  padding: 0.75rem 2.75rem 0.75rem 1rem;
+}
+
+.inputField:focus {
+  outline: none;
+  border-color: #1ABC9C;
+  box-shadow: 0 0 0 3px rgba(26, 188, 156, 0.1);
+}
+
+/* Password Field Wrapper */
+.passwordWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.passwordLockIcon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #1ABC9C;
+  z-index: 1;
+  pointer-events: none;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+:global([dir="rtl"]) .passwordLockIcon {
+  left: auto;
+  right: 1rem;
+}
+
+.passwordInput {
+  width: 100%;
+  padding: 0.75rem 2.75rem 0.75rem 2.75rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  background: white;
+  color: #1e293b;
+}
+
+:global([dir="rtl"]) .passwordInput {
+  padding: 0.75rem 2.75rem 0.75rem 2.75rem;
+}
+
+.passwordInput:focus {
+  outline: none;
+  border-color: #1ABC9C;
+  box-shadow: 0 0 0 3px rgba(26, 188, 156, 0.1);
+}
+
+.passwordToggle {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  transition: color 0.2s ease;
+  z-index: 2;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+:global([dir="rtl"]) .passwordToggle {
+  right: auto;
+  left: 1rem;
+}
+
+.passwordToggle:hover {
+  color: #1ABC9C;
+}
+
+.alert {
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

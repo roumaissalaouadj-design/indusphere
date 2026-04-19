@@ -1,0 +1,87 @@
+/* ===== Card Base ===== */
+.card {
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-lg);
+}
+
+/* ===== Stat Card ===== */
+.statCard {
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-md);
+  transition: var(--transition);
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-xs);
+}
+
+.statValue {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+/* ===== Variants ===== */
+.cardWarning {
+  border-color: rgba(245, 158, 11, 0.2);
+}
+
+.cardSuccess {
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+.cardDanger {
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+.cardInfo {
+  border-color: rgba(37, 150, 190);
+}
+
+/* ===== Badge ===== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 2px var(--spacing-sm);
+  border-radius: 9999px;
+  border: 1px solid;
+}
+
+.badgeWarning {
+  background-color: rgba(245, 158, 11, 0.1);
+  color: var(--color-warning);
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.badgeSuccess {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--color-success);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.badgeDanger {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--color-danger);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.badgeInfo {
+  background-color: rgba(59, 130, 246, 0.1);
+  color: var(--color-info);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.badgeGray {
+  background-color: rgba(107, 114, 128, 0.1);
+  color: var(--color-text-muted);
+  border-color: rgba(107, 114, 128, 0.3);
+}

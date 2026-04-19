@@ -1,0 +1,65 @@
+/* ==================== Table Actions Styles ==================== */
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* زر عام */
+.actionBtn {
+  padding: 0.375rem;
+  border-radius: var(--radius-lg);
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.actionBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* زر التعديل */
+.editBtn {
+  background-color: rgba(52, 152, 219, 0.1);
+  color: var(--color-info);
+}
+
+.editBtn:hover:not(:disabled) {
+  background-color: rgba(52, 152, 219, 0.2);
+  transform: scale(1.05);
+}
+
+/* زر الحذف */
+.deleteBtn {
+  background-color: rgba(231, 76, 60, 0.1);
+  color: var(--color-danger);
+}
+
+.deleteBtn:hover:not(:disabled) {
+  background-color: rgba(231, 76, 60, 0.2);
+  transform: scale(1.05);
+}
+
+/* أيقونات SVG */
+.icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
