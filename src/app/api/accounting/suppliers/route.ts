@@ -1,4 +1,3 @@
-// src/app/api/accounting/suppliers/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 import { connectDB } from '@/lib/mongodb';
@@ -11,6 +10,12 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ success: false, message: 'غير مصرح' }, { status: 401 });
     }
 
+    // ✅ استخراج tenantId من التوكن
+    const tenantId = token.tenantId;
+    if (!tenantId) {
+      return NextResponse.json({ success: false, message: 'لا يوجد مصنع مرتبط بالحساب' }, { status: 400 });
+    }
+
     await connectDB();
 
     const { searchParams } = new URL(request.url);
@@ -18,7 +23,8 @@ export async function GET(request: NextRequest) {
     const isActive = searchParams.get('isActive');
     const search = searchParams.get('search');
 
-    const query: Record<string, unknown> = {};
+    // ✅ إضافة tenantId إلى الاستعلام
+    const query: Record<string, unknown> = { tenantId };
 
     if (category && category !== 'all') {
       query.category = category;
@@ -52,6 +58,12 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: false, message: 'غير مصرح' }, { status: 401 });
     }
 
+    // ✅ استخراج tenantId من التوكن
+    const tenantId = token.tenantId;
+    if (!tenantId) {
+      return NextResponse.json({ success: false, message: 'لا يوجد مصنع مرتبط بالحساب' }, { status: 400 });
+    }
+
     await connectDB();
 
     const body = await request.json();
@@ -63,7 +75,9 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // ✅ التحقق من وجود الكود أو الرقم الضريبي في نفس tenantId فقط
     const existingSupplier = await Supplier.findOne({
+      tenantId,
       $or: [{ code: body.code }, { taxNumber: body.taxNumber }]
     });
 
@@ -71,8 +85,10 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: false, message: 'الكود أو الرقم الضريبي موجود مسبقاً' }, { status: 400 });
     }
 
+    // ✅ إضافة tenantId إلى البيانات الجديدة
     const supplier = await Supplier.create({
       ...body,
+      tenantId,
       balance: 0,
       isActive: true,
     });
