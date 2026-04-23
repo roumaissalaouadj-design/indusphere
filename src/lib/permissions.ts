@@ -11,6 +11,13 @@ export const ALL_PERMISSIONS = [
   'erp.inventory.view',    'erp.inventory.create',    'erp.inventory.edit',
   'erp.procurement.view',  'erp.procurement.create',  'erp.procurement.edit',
   'erp.hr.view',           'erp.hr.create',           'erp.hr.edit',
+  // Accounting ✅ جديد
+  'accounting.suppliers.view',    'accounting.suppliers.create',    'accounting.suppliers.edit',
+  'accounting.customers.view',    'accounting.customers.create',    'accounting.customers.edit',
+  'accounting.invoices.view',     'accounting.invoices.create',     'accounting.invoices.edit',
+  'accounting.payroll.view',      'accounting.payroll.create',      'accounting.payroll.edit',
+  'accounting.taxes.view',        'accounting.taxes.create',        'accounting.taxes.edit',
+  'accounting.production.view',   'accounting.production.create',   'accounting.production.edit',
   // Settings
   'settings.users.view',   'settings.users.create',   'settings.users.edit',
   'settings.roles.view',   'settings.roles.create',   'settings.roles.edit',
@@ -18,7 +25,6 @@ export const ALL_PERMISSIONS = [
 
 export type Permission = typeof ALL_PERMISSIONS[number]
 
-// الأدوار الافتراضية
 export const DEFAULT_ROLES = [
   {
     name: 'Admin',
@@ -33,6 +39,11 @@ export const DEFAULT_ROLES = [
   {
     name: 'ERP Manager',
     permissions: ALL_PERMISSIONS.filter(p => p.startsWith('erp')),
+    isDefault: false,
+  },
+  {
+    name: 'Accountant', // ✅ جديد
+    permissions: ALL_PERMISSIONS.filter(p => p.startsWith('accounting')),
     isDefault: false,
   },
   {
