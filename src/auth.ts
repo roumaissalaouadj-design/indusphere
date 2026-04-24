@@ -39,63 +39,60 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        console.log('🔐 محاولة تسجيل الدخول:', credentials?.email);
-        
-        if (!credentials?.email || !credentials?.password) {
-          console.log('❌ البريد الإلكتروني أو كلمة المرور مفقودة');
-          return null;
-        }
+  console.log('🔐 محاولة تسجيل الدخول:', credentials?.email);
+  
+  if (!credentials?.email || !credentials?.password) {
+    console.log('❌ البريد الإلكتروني أو كلمة المرور مفقودة');
+    return null;
+  }
 
-        await connectDB();
+  await connectDB();
 
-        const user = await User.findOne({
-          email: credentials.email,
-          isActive: true,
-        }).populate('roleId');
+  const user = await User.findOne({
+    email: credentials.email,
+    isActive: true,
+  }).populate({
+    path: 'roleId',
+    model: 'Role',
+    select: 'name permissions'
+  });
 
-        if (!user) {
-          console.log('❌ المستخدم غير موجود:', credentials?.email);
-          return null;
-        }
+  if (!user) {
+    console.log('❌ المستخدم غير موجود:', credentials?.email);
+    return null;
+  }
 
-        console.log('✅ المستخدم موجود:', {
-          id: user._id,
-          email: user.email,
-          name: user.name,
-          tenantId: user.tenantId,
-        });
+  console.log('✅ المستخدم موجود:', {
+    id: user._id,
+    email: user.email,
+    roleName: user.roleId?.name,
+    permissionsCount: user.roleId?.permissions?.length
+  });
 
-        const isValid = await bcrypt.compare(
-          credentials.password as string,
-          user.passwordHash
-        );
+  const isValid = await bcrypt.compare(
+    credentials.password as string,
+    user.passwordHash
+  );
 
-        if (!isValid) {
-          console.log('❌ كلمة المرور غير صحيحة للمستخدم:', credentials?.email);
-          return null;
-        }
+  if (!isValid) {
+    console.log('❌ كلمة المرور غير صحيحة للمستخدم:', credentials?.email);
+    return null;
+  }
 
-        console.log('✅ كلمة المرور صحيحة، جاري إنشاء الجلسة');
+  const extendedUser: ExtendedUser = {
+    id:       user._id.toString(),
+    email:    user.email,
+    name:     user.name || user.email.split('@')[0],
+    tenantId: user.tenantId.toString(),
+    roleId:   user.roleId?._id?.toString() ?? '',
+    role:     user.roleId?.name || 'Admin',
+    permissions: user.roleId?.permissions || [],
+  };
 
-        const extendedUser: ExtendedUser = {
-          id:       user._id.toString(),
-          email:    user.email,
-          name:     user.name || user.email.split('@')[0],
-          tenantId: user.tenantId.toString(),
-          roleId:   user.roleId?._id?.toString() ?? '',
-          role:     user.roleId?.name || 'Admin',
-          permissions: user.roleId?.permissions || [],
-        };
+  console.log('👤 المستخدم الموسع - عدد الصلاحيات:', extendedUser.permissions.length);
 
-        console.log('👤 المستخدم الموسع:', {
-          id: extendedUser.id,
-          email: extendedUser.email,
-          name: extendedUser.name,
-          tenantId: extendedUser.tenantId,
-        });
-
-        return extendedUser;
-      },
+  return extendedUser;
+},
     }),
   ],
   callbacks: {
