@@ -4,16 +4,16 @@
 import React, { use } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Factory } from 'lucide-react';
+import Image from 'next/image';
 
 export default function AuthLayout({
   children,
   params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>; // ✅ Promise فقط بدون Union
+  params: Promise<{ locale: string }>;
 }) {
-  const { locale } = use(params); // ✅ use() مباشرة بدون instanceof
+  const { locale } = use(params);
   
   const pathname = usePathname();
   const router = useRouter();
@@ -31,7 +31,25 @@ export default function AuthLayout({
           <div className="flex items-center justify-between">
             {/* Logo */}
             <Link href={`/${locale}`} className="flex items-center gap-2 group">
-              <Factory className="w-8 h-8 text-[#1ABC9C]" />
+              {/* ✅ Logo image */}
+              <div style={{
+                width: '40px',
+                height: '40px',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                background: 'transparent',
+              }}>
+                <Image
+                  src="/indusphere-logo.png"
+                  alt="Indusphere Logo"
+                  width={40}
+                  height={40}
+                  style={{ 
+                    objectFit: 'contain',
+                    mixBlendMode: 'multiply'
+                  }}
+                />
+              </div>
               <span className="text-xl font-bold text-white tracking-wider">
                 INDU<span className="text-[#1ABC9C]">SPHERE</span>
               </span>

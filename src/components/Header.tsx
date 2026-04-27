@@ -33,10 +33,18 @@ export default function Header() {
         {/* Logo - مع إضافة صورة الشعار */}
         <div className={styles.logo}>
           <Link href={`/${locale}/dashboard`} className={styles.logoLink}>
-          <img 
-           src="/indusphere-logo.png" 
-          alt="Indusphere Logo"
-       style={{ width: '32px', height: '32px', marginRight: '8px' }}
+ <img 
+  src="/indusphere-logo.png" 
+  alt="Indusphere Logo"
+  style={{ 
+    width: '40px', 
+    height: '40px', 
+    marginRight: '8px',
+    borderRadius: '8px',
+    objectFit: 'contain',
+    background: 'transparent',
+    mixBlendMode: 'multiply'  // يزيل الخلفية البيضاء
+  }}
 />
             <span className={styles.logoText}>INDU SPHERE</span>
           </Link>
