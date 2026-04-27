@@ -33,12 +33,11 @@ export default function Header() {
         {/* Logo - مع إضافة صورة الشعار */}
         <div className={styles.logo}>
           <Link href={`/${locale}/dashboard`} className={styles.logoLink}>
-            {/* ✅ إضافة صورة الشعار */}
-            <img 
-              src="/indusphere-logo.svg" 
-              alt="Indusphere Logo"
-              style={{ width: '32px', height: '32px', marginRight: '8px' }}
-            />
+          <img 
+           src="/indusphere-logo.png" 
+          alt="Indusphere Logo"
+       style={{ width: '32px', height: '32px', marginRight: '8px' }}
+/>
             <span className={styles.logoText}>INDU SPHERE</span>
           </Link>
         </div>
