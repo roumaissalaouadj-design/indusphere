@@ -77,7 +77,7 @@ export default function LoginPage() {
 
   return (
     <div className="w-full max-w-md">
-      {/* Logo Section */}
+{/* Logo Section */}
 <div className="text-center mb-8">
   <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl shadow-lg mb-4 overflow-hidden bg-white/10">
     <img 
@@ -90,6 +90,13 @@ export default function LoginPage() {
       }}
     />
   </div>
+  <h1 className="text-3xl font-bold text-white mb-2">
+    {getTitle()}
+  </h1>
+  <p className="text-gray-300 text-sm">
+    {getSubtitle()}
+  </p>
+</div>
   <h1 className="text-3xl font-bold text-white mb-2">
     {getTitle()}
   </h1>
