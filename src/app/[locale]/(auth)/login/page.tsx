@@ -50,7 +50,6 @@ export default function LoginPage() {
     }
   };
 
-  // نصوص ثابتة للعنوان حسب اللغة
   const getTitle = () => {
     if (locale === 'ar') return 'تسجيل الدخول';
     if (locale === 'fr') return 'Connexion';
@@ -77,33 +76,26 @@ export default function LoginPage() {
 
   return (
     <div className="w-full max-w-md">
-{/* Logo Section */}
-<div className="text-center mb-8">
-  <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl shadow-lg mb-4 overflow-hidden bg-white/10">
-    <img 
-      src="/indusphere-logo.png" 
-      alt="Indusphere Logo"
-      style={{ 
-        width: '64px', 
-        height: '64px', 
-        objectFit: 'contain',
-      }}
-    />
-  </div>
-  <h1 className="text-3xl font-bold text-white mb-2">
-    {getTitle()}
-  </h1>
-  <p className="text-gray-300 text-sm">
-    {getSubtitle()}
-  </p>
-</div>
-  <h1 className="text-3xl font-bold text-white mb-2">
-    {getTitle()}
-  </h1>
-  <p className="text-gray-300 text-sm">
-    {getSubtitle()}
-  </p>
-</div>
+      {/* Logo Section */}
+      <div className="text-center mb-8">
+        <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl shadow-lg mb-4 overflow-hidden bg-white/10">
+          <img 
+            src="/indusphere-logo.png" 
+            alt="Indusphere Logo"
+            style={{ 
+              width: '64px', 
+              height: '64px', 
+              objectFit: 'contain',
+            }}
+          />
+        </div>
+        <h1 className="text-3xl font-bold text-white mb-2">
+          {getTitle()}
+        </h1>
+        <p className="text-gray-300 text-sm">
+          {getSubtitle()}
+        </p>
+      </div>
 
       {/* Card */}
       <div className={`bg-white rounded-xl shadow-2xl overflow-hidden ${styles.card}`}>
