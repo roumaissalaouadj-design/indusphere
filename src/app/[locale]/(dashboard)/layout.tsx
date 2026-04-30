@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { use } from 'react'
 import { useLocale } from 'next-intl'
 import Sidebar from '@/components/Sidebar'
 import Header from '@/components/Header'
@@ -9,10 +10,14 @@ import Providers from '@/components/Providers'
 import MaintenanceAssistant from '@/components/MaintenanceAssistant'
 import styles from '@/styles/pages/dashboard.module.css'
 
-function DashboardContent({ children }: { children: React.ReactNode }) {
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+function DashboardContent({ children, params }: { children: React.ReactNode; params: Promise<{ locale: string }> }) {
+  const { locale } = use(params);
   const [mobileOpen, setMobileOpen] = useState(false)
   const [collapsed, setCollapsed] = useState(false)
-  const locale = useLocale()
   const isRTL = locale === 'ar'
 
   const sidebarWidth = collapsed ? '72px' : '280px'
@@ -27,11 +32,12 @@ function DashboardContent({ children }: { children: React.ReactNode }) {
           [isRTL ? 'marginRight' : 'marginLeft']: sidebarWidth,
         }}
       >
-        <Header />
+        <Header params={params} />
       </div>
 
       <div className={styles.body}>
         <Sidebar
+          params={params}
           mobileOpen={mobileOpen}
           onMobileClose={() => setMobileOpen(false)}
           onCollapsedChange={setCollapsed}
@@ -61,10 +67,10 @@ function DashboardContent({ children }: { children: React.ReactNode }) {
   )
 }
 
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+export default function DashboardLayout({ children, params }: Props & { children: React.ReactNode }) {
   return (
     <Providers>
-      <DashboardContent>{children}</DashboardContent>
+      <DashboardContent params={params}>{children}</DashboardContent>
     </Providers>
   )
 }
