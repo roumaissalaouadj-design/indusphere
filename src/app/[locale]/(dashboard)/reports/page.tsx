@@ -594,10 +594,11 @@ export default function ReportsPage({ params }: Props) {
   const [startDate, setStartDate] = useState<string>('');
   const [endDate, setEndDate] = useState<string>('');
 
-  const fetchAIReport = async (): Promise<void> => {
+  // ✅ تمرير اللغة إلى API
+  const fetchAIReport = async (lang: string): Promise<void> => {
     setLoading(true);
     try {
-      const res = await fetch('/api/ai/report-analysis');
+      const res = await fetch(`/api/ai/report-analysis?locale=${lang}`);
       const json = await res.json();
       if (json.success) {
         setAiData(json.data);
@@ -610,9 +611,10 @@ export default function ReportsPage({ params }: Props) {
     }
   };
 
+  // ✅ إعادة جلب التقرير عند تغيير اللغة
   useEffect(() => {
-    fetchAIReport();
-  }, []);
+    fetchAIReport(locale);
+  }, [locale]);
 
   const tabs: { id: TabType; label: string; icon: string }[] = [
     { id: 'ai', label: t('aiTab'), icon: '🤖' },
@@ -638,7 +640,7 @@ export default function ReportsPage({ params }: Props) {
           </div>
           <div className={styles.headerButtons}>
             {activeTab === 'ai' && (
-              <button onClick={fetchAIReport} disabled={loading} className={styles.refreshButton}>
+              <button onClick={() => fetchAIReport(locale)} disabled={loading} className={styles.refreshButton}>
                 {loading ? `⏳ ${t('analyzing')}` : `🔄 ${t('refresh')}`}
               </button>
             )}
