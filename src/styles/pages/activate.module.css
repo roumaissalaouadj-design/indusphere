@@ -38,7 +38,6 @@
   border: 2px solid rgba(26,188,156,0.3);
   background: transparent;
 }
-
 .logoContainer:hover {
   transform: scale(1.04);
   box-shadow: 0 28px 48px -12px rgba(26,188,156,0.45);
