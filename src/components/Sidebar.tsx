@@ -2,17 +2,16 @@
 
 import { use } from 'react';
 import { useTranslations } from 'next-intl';
-
-type Props = {
-  params: Promise<{ locale: string }>;
-};
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { logout } from '@/app/actions/auth';
 import { usePermissions } from '@/hooks/usePermissions';
-import { useTranslations } from 'next-intl';
 import styles from '@/styles/components/Sidebar.module.css';
+
+type Props = {
+  params: Promise<{ locale: string }>;
+};
 
 interface SidebarProps {
   mobileOpen?: boolean;
@@ -20,7 +19,7 @@ interface SidebarProps {
   onCollapsedChange?: (collapsed: boolean) => void;
 }
 
-export default function Sidebar({ mobileOpen = false, onMobileClose, onCollapsedChange }: SidebarProps) {
+export default function Sidebar({ params, mobileOpen = false, onMobileClose, onCollapsedChange }: SidebarProps & Props) {
   const pathname = usePathname();
   const { locale } = use(params);
   const t = useTranslations('Nav');
@@ -82,7 +81,6 @@ export default function Sidebar({ mobileOpen = false, onMobileClose, onCollapsed
         { href: '/erp/accounting/sales/prices', icon: '🏷️', label: tAccounting('prices'), permission: null },
         // 3. الإنتاج
         { href: '/erp/accounting/production/costs', icon: '🏗️', label: tAccounting('productionCosts'), permission: null },
-
         // 5. الضرائب
         { href: '/erp/accounting/taxes/settings', icon: '⚙️', label: tAccounting('taxSettings'), permission: null },
         { href: '/erp/accounting/taxes/declarations', icon: '📋', label: tAccounting('taxDeclarations'), permission: null },
