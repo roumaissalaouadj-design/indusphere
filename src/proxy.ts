@@ -1,12 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
+import createIntlMiddleware from 'next-intl/middleware';
+import { routing } from './i18n/routing';
 
 // قائمة المسارات المحمية (تتطلب مصادقة)
 const protectedPaths = ['/dashboard', '/cmms', '/erp', '/reports', '/settings'];
 // قائمة مسارات المصادقة (إذا كان المستخدم مسجلًا، يتم إعادة توجيهه)
 const authPaths = ['/login', '/register', '/activate'];
 
-// ✅ يجب أن يكون اسم الدالة هو "proxy"
-export function proxy(request: NextRequest) {
+// إنشاء middleware مخصص للترجمة
+const intlMiddleware = createIntlMiddleware(routing);
+
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // إزالة اللغة من المسار (مثل /ar/dashboard -> /dashboard)
@@ -31,6 +35,12 @@ export function proxy(request: NextRequest) {
   if (isAuth && token) {
     const locale = pathname.match(/^\/(ar|fr|en)/)?.[1] || 'ar';
     return NextResponse.redirect(new URL(`/${locale}/dashboard`, request.url));
+  }
+
+  // ✅ تطبيق middleware الترجمة على باقي المسارات
+  const intlResponse = await intlMiddleware(request);
+  if (intlResponse) {
+    return intlResponse;
   }
 
   // إذا لم يكن هناك حاجة لإعادة توجيه، نسمح بمرور الطلب

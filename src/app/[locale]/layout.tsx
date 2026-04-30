@@ -3,16 +3,17 @@ import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing, type Locale } from '@/i18n/routing';
 import Providers from '@/components/Providers';
-import '@/styles/globals.css';  // ✅ المسار الصحيح
+import '@/styles/globals.css';
 
 type Props = {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
+  params: { locale: string };
 };
 
 export default async function LocaleLayout({ children, params }: Props) {
-  const { locale } = await params;
+  const { locale } = params;
   
+  // التحقق من صحة اللغة
   if (!routing.locales.includes(locale as Locale)) {
     notFound();
   }
