@@ -1,14 +1,23 @@
 /* src/styles/pages/activate.module.css */
 
-/* ==================== Animations ==================== */
-.card {
-  animation: fadeInUp 0.5s ease-out;
+/* ==================== متغيرات الألوان ==================== */
+:root {
+  --primary: #1ABC9C;
+  --primary-dark: #16a085;
+  --primary-light: #48d1b8;
+  --dark: #2C3E50;
+  --dark-light: #34495e;
+  --white: #ffffff;
+  --gray-light: #f8fafc;
+  --gray: #e2e8f0;
+  --gray-dark: #94a3b8;
 }
 
+/* ==================== Animations ==================== */
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -16,15 +25,10 @@
   }
 }
 
-.landingCard {
-  animation: fadeInScale 0.6s ease-out;
-  text-align: center;
-}
-
 @keyframes fadeInScale {
   from {
     opacity: 0;
-    transform: scale(0.95);
+    transform: scale(0.9);
   }
   to {
     opacity: 1;
@@ -32,34 +36,80 @@
   }
 }
 
-/* ==================== Logo Styles ==================== */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-/* حاوية الشعار */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(26, 188, 156, 0.4);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(26, 188, 156, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(26, 188, 156, 0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.card {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.landingCard {
+  animation: fadeInScale 0.6s ease-out;
+  text-align: center;
+}
+
+/* ==================== Logo Styles ==================== */
 .logoContainer {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #1ABC9C, #16a085);
-  box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  border-radius: 30px;
   margin: 0 auto 1.5rem auto;
   overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.25);
 }
 
-/* حاوية الشعار للصفحة الرئيسية (حجم كبير) */
+.logoContainer:hover {
+  transform: scale(1.02);
+  box-shadow: 0 25px 30px -12px rgba(26, 188, 156, 0.3);
+}
+
 .logoContainerLarge {
-  width: 112px;
-  height: 112px;
-  border-radius: 28px;
+  width: 120px;
+  height: 120px;
+  border-radius: 32px;
 }
 
-/* حاوية الشعار للنموذج (حجم متوسط) */
 .logoContainerMedium {
-  width: 88px;
-  height: 88px;
-  border-radius: 20px;
+  width: 96px;
+  height: 96px;
+  border-radius: 24px;
 }
 
-/* صورة الشعار */
 .logoImage {
   width: 100%;
   height: 100%;
@@ -67,24 +117,36 @@
   object-position: center;
 }
 
-/* صورة الشعار في الصفحة الرئيسية */
 .logoImageLarge {
-  width: 112px;
-  height: 112px;
-  object-fit: cover;
+  width: 120px;
+  height: 120px;
 }
 
-/* صورة الشعار في النموذج */
 .logoImageMedium {
-  width: 88px;
-  height: 88px;
-  object-fit: cover;
+  width: 96px;
+  height: 96px;
+}
+
+/* ==================== Typography ==================== */
+.title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 350px;
+  margin: 0 auto;
+  line-height: 1.5;
 }
 
 /* ==================== Feature Cards ==================== */
 .featureCard {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
   border-radius: 1rem;
   padding: 1.5rem;
   text-align: center;
@@ -93,75 +155,89 @@
 }
 
 .featureCard:hover {
-  background: rgba(255, 255, 255, 0.15);
-  transform: translateY(-4px);
-  border-color: rgba(26, 188, 156, 0.3);
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-5px);
+  border-color: rgba(26, 188, 156, 0.4);
 }
 
 .featureIconWrapper {
-  width: 56px;
-  height: 56px;
-  background: rgba(26, 188, 156, 0.2);
-  border-radius: 14px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, rgba(26, 188, 156, 0.2), rgba(26, 188, 156, 0.1));
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 1rem auto;
+  transition: all 0.3s ease;
+}
+
+.featureCard:hover .featureIconWrapper {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, rgba(26, 188, 156, 0.3), rgba(26, 188, 156, 0.15));
 }
 
 .featureIcon {
   width: 28px;
   height: 28px;
-  color: #1ABC9C;
+  color: var(--primary);
 }
 
 .featureTitle {
-  color: white;
+  color: var(--white);
   font-weight: 600;
   font-size: 1.125rem;
   margin-bottom: 0.5rem;
 }
 
 .featureDesc {
-  color: #9ca3af;
-  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.813rem;
   line-height: 1.5;
 }
 
 /* ==================== Primary Button ==================== */
 .primaryButton {
-  background: linear-gradient(135deg, #1ABC9C, #16a085);
-  color: white;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: var(--white);
   font-weight: 700;
-  font-size: 1.125rem;
-  padding: 1rem 2rem;
+  font-size: 1rem;
+  padding: 0.875rem 2rem;
   border-radius: 0.75rem;
-  transition: all 0.3s ease;
   border: none;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
-  min-width: 220px;
+  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  min-width: 240px;
 }
 
 .primaryButton:hover {
-  background: linear-gradient(135deg, #16a085, #1ABC9C);
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
   transform: translateY(-2px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 20px 25px -10px rgba(26, 188, 156, 0.4);
 }
 
 .primaryButton:active {
   transform: translateY(0);
 }
 
-.primaryButton span {
-  font-size: 1.125rem;
+/* ==================== Form Card ==================== */
+.formCard {
+  background: var(--white);
+  border-radius: 1rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
 }
 
-/* ==================== Input Wrapper ==================== */
+.formContent {
+  padding: 2rem;
+}
+
+/* ==================== Input Styles ==================== */
 .inputWrapper {
   position: relative;
   width: 100%;
@@ -172,7 +248,7 @@
   left: 1rem;
   top: 50%;
   transform: translateY(-50%);
-  color: #1ABC9C;
+  color: var(--primary);
   z-index: 1;
   pointer-events: none;
   width: 1.25rem;
@@ -187,12 +263,12 @@
 .inputField {
   width: 100%;
   padding: 0.75rem 1rem 0.75rem 2.75rem;
-  border: 2px solid #e2e8f0;
+  border: 2px solid var(--gray);
   border-radius: 0.5rem;
   font-size: 0.875rem;
   transition: all 0.2s ease;
-  background: white;
-  color: #1e293b;
+  background: var(--white);
+  color: var(--dark);
 }
 
 :global([dir="rtl"]) .inputField {
@@ -201,15 +277,15 @@
 
 .inputField:focus {
   outline: none;
-  border-color: #1ABC9C;
+  border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(26, 188, 156, 0.1);
 }
 
 .inputField:hover {
-  border-color: #cbd5e1;
+  border-color: var(--gray-dark);
 }
 
-/* ==================== Password Wrapper ==================== */
+/* ==================== Password Styles ==================== */
 .passwordWrapper {
   position: relative;
   width: 100%;
@@ -220,7 +296,7 @@
   left: 1rem;
   top: 50%;
   transform: translateY(-50%);
-  color: #1ABC9C;
+  color: var(--primary);
   z-index: 1;
   pointer-events: none;
   width: 1.25rem;
@@ -235,12 +311,12 @@
 .passwordInput {
   width: 100%;
   padding: 0.75rem 2.75rem 0.75rem 2.75rem;
-  border: 2px solid #e2e8f0;
+  border: 2px solid var(--gray);
   border-radius: 0.5rem;
   font-size: 0.875rem;
   transition: all 0.2s ease;
-  background: white;
-  color: #1e293b;
+  background: var(--white);
+  color: var(--dark);
 }
 
 :global([dir="rtl"]) .passwordInput {
@@ -249,7 +325,7 @@
 
 .passwordInput:focus {
   outline: none;
-  border-color: #1ABC9C;
+  border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(26, 188, 156, 0.1);
 }
 
@@ -265,7 +341,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #94a3b8;
+  color: var(--gray-dark);
   transition: color 0.2s ease;
   z-index: 2;
   width: 1.5rem;
@@ -278,24 +354,49 @@
 }
 
 .passwordToggle:hover {
-  color: #1ABC9C;
+  color: var(--primary);
 }
 
 /* ==================== Alerts ==================== */
-.alert {
-  animation: slideDown 0.3s ease-out;
-  border-right-width: 4px;
+.successAlert {
+  background: #ecfdf5;
+  border-right: 4px solid var(--primary);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.errorAlert {
+  background: #fef2f2;
+  border-right: 4px solid #ef4444;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.alertIcon {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.alertText {
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.successText {
+  color: #065f46;
+}
+
+.errorText {
+  color: #dc2626;
 }
 
 /* ==================== Password Strength ==================== */
@@ -303,12 +404,12 @@
   height: 4px;
   border-radius: 2px;
   transition: all 0.3s ease;
-  margin-top: 8px;
+  margin-top: 0.5rem;
 }
 
 .strengthText {
   font-size: 0.7rem;
-  margin-top: 4px;
+  margin-top: 0.25rem;
   transition: color 0.3s ease;
 }
 
@@ -325,75 +426,117 @@
   position: relative;
   overflow: hidden;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.activateButton::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
-}
-
-.activateButton:hover::before {
-  width: 300px;
-  height: 300px;
+.activateButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2);
 }
 
 .activateButton:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+  transform: none;
 }
 
-/* ==================== Icon Pulse Animation ==================== */
+/* ==================== Icon Pulse ==================== */
 .iconPulse {
   animation: pulse 2s infinite;
 }
 
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
+/* ==================== Forms Grid ==================== */
+.formGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.formFieldFull {
+  width: 100%;
+}
+
+.formLabel {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 0.5rem;
+}
+
+.formLabel span {
+  color: #ef4444;
+}
+
+/* ==================== Buttons Container ==================== */
+.formActions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.saveButton {
+  flex: 1;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: var(--white);
+  font-weight: 600;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.saveButton:hover {
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+}
+
+.cancelButton {
+  flex: 1;
+  background: var(--gray-light);
+  color: var(--dark);
+  font-weight: 600;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--gray);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancelButton:hover {
+  background: var(--gray);
 }
 
 /* ==================== Responsive Design ==================== */
 @media (max-width: 768px) {
   .logoContainerLarge {
-    width: 88px;
-    height: 88px;
-    border-radius: 22px;
+    width: 96px;
+    height: 96px;
+    border-radius: 28px;
   }
   
   .logoContainerMedium {
-    width: 72px;
-    height: 72px;
-    border-radius: 16px;
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
   }
   
   .logoImageLarge {
-    width: 88px;
-    height: 88px;
+    width: 96px;
+    height: 96px;
   }
   
   .logoImageMedium {
-    width: 72px;
-    height: 72px;
+    width: 80px;
+    height: 80px;
   }
   
-  .landingCard {
-    margin: 1rem;
-    padding: 1.5rem;
+  .title {
+    font-size: 1.5rem;
+  }
+  
+  .subtitle {
+    font-size: 0.75rem;
   }
   
   .featureCard {
@@ -420,30 +563,49 @@
   
   .primaryButton {
     padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    min-width: 180px;
+    font-size: 0.875rem;
+    min-width: 200px;
   }
   
-  .primaryButton span {
-    font-size: 1rem;
+  .formContent {
+    padding: 1.5rem;
   }
 }
 
 @media (max-width: 480px) {
+  .logoContainerLarge {
+    width: 80px;
+    height: 80px;
+    border-radius: 24px;
+  }
+  
+  .logoContainerMedium {
+    width: 72px;
+    height: 72px;
+    border-radius: 18px;
+  }
+  
+  .logoImageLarge {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .logoImageMedium {
+    width: 72px;
+    height: 72px;
+  }
+  
   .primaryButton {
-    padding: 0.6rem 1.2rem;
-    font-size: 0.875rem;
+    padding: 0.6rem 1rem;
+    font-size: 0.75rem;
     min-width: 160px;
   }
   
-  .primaryButton span {
-    font-size: 0.875rem;
+  .formContent {
+    padding: 1rem;
   }
   
-  .inputField,
-  .passwordInput {
-    font-size: 0.75rem;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+  .formActions {
+    flex-direction: column;
   }
 }
