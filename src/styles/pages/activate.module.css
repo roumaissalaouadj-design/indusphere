@@ -2,108 +2,57 @@
 
 /* ==================== Animations ==================== */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeInScale {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
 @keyframes pulse {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(26, 188, 156, 0.4);
-  }
-  70% {
-    transform: scale(1.05);
-    box-shadow: 0 0 0 10px rgba(26, 188, 156, 0);
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(26, 188, 156, 0);
-  }
+  0%   { transform: scale(1);    box-shadow: 0 0 0 0   rgba(26,188,156,0.4); }
+  70%  { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(26,188,156,0); }
+  100% { transform: scale(1);    box-shadow: 0 0 0 0   rgba(26,188,156,0); }
 }
 
-.card {
-  animation: fadeInUp 0.5s ease-out;
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
 }
 
-.landingCard {
-  animation: fadeInScale 0.6s ease-out;
-  text-align: center;
-}
+.card        { animation: fadeInUp    0.5s ease-out; }
+.landingCard { animation: fadeInScale 0.6s ease-out; text-align: center; }
 
-/* ==================== Logo Styles ==================== */
+/* ==================== Logo ==================== */
 .logoContainer {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #1ABC9C, #16a085);
   border-radius: 30px;
   margin: 0 auto 1.5rem auto;
   overflow: hidden;
   transition: all 0.3s ease;
-  box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 20px 40px -12px rgba(26,188,156,0.35);
+  border: 2px solid rgba(26,188,156,0.3);
+  background: transparent;
 }
 
 .logoContainer:hover {
-  transform: scale(1.02);
-  box-shadow: 0 25px 30px -12px rgba(26, 188, 156, 0.3);
+  transform: scale(1.04);
+  box-shadow: 0 28px 48px -12px rgba(26,188,156,0.45);
+  border-color: rgba(26,188,156,0.6);
 }
 
-.logoContainerLarge {
-  width: 120px;
-  height: 120px;
-  border-radius: 32px;
-}
+.logoContainerLarge  { width: 120px; height: 120px; border-radius: 32px; }
+.logoContainerMedium { width: 96px;  height: 96px;  border-radius: 24px; }
 
-.logoContainerMedium {
-  width: 96px;
-  height: 96px;
-  border-radius: 24px;
-}
+.logoImage       { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.logoImageLarge  { width: 120px; height: 120px; }
+.logoImageMedium { width: 96px;  height: 96px;  }
 
-.logoImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.logoImageLarge {
-  width: 120px;
-  height: 120px;
-}
-
-.logoImageMedium {
-  width: 96px;
-  height: 96px;
-}
+.iconPulse { animation: pulse 2.5s infinite; }
 
 /* ==================== Typography ==================== */
 .title {
@@ -115,111 +64,110 @@
 
 .subtitle {
   font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.7);
-  max-width: 350px;
+  color: rgba(255,255,255,0.7);
+  max-width: 380px;
   margin: 0 auto;
-  line-height: 1.5;
+  line-height: 1.6;
+  text-align: center;
 }
 
 /* ==================== Feature Cards ==================== */
 .featureCard {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(12px);
-  border-radius: 1rem;
-  padding: 1.5rem;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(16px);
+  border-radius: 1.25rem;
+  padding: 1.75rem 1.25rem;
   text-align: center;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  border: 1px solid rgba(255,255,255,0.1);
+  cursor: default;
 }
 
 .featureCard:hover {
-  background: rgba(255, 255, 255, 0.12);
-  transform: translateY(-5px);
-  border-color: rgba(26, 188, 156, 0.4);
+  background: rgba(26,188,156,0.1);
+  transform: translateY(-8px) scale(1.03);
+  border-color: rgba(26,188,156,0.5);
+  box-shadow: 0 20px 40px -10px rgba(26,188,156,0.25);
 }
 
 .featureIconWrapper {
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(135deg, rgba(26, 188, 156, 0.2), rgba(26, 188, 156, 0.1));
-  border-radius: 16px;
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, rgba(26,188,156,0.25), rgba(26,188,156,0.1));
+  border-radius: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 1rem auto;
-  transition: all 0.3s ease;
+  transition: all 0.35s ease;
+  border: 1px solid rgba(26,188,156,0.2);
 }
 
 .featureCard:hover .featureIconWrapper {
-  transform: scale(1.05);
-  background: linear-gradient(135deg, rgba(26, 188, 156, 0.3), rgba(26, 188, 156, 0.15));
+  transform: scale(1.1) rotate(5deg);
+  background: linear-gradient(135deg, rgba(26,188,156,0.4), rgba(26,188,156,0.2));
+  border-color: rgba(26,188,156,0.5);
+  box-shadow: 0 8px 20px -4px rgba(26,188,156,0.3);
 }
 
-.featureIcon {
-  width: 28px;
-  height: 28px;
-  color: #1ABC9C;
-}
-
-.featureTitle {
-  color: #ffffff;
-  font-weight: 600;
-  font-size: 1.125rem;
-  margin-bottom: 0.5rem;
-}
-
-.featureDesc {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 0.813rem;
-  line-height: 1.5;
-}
+.featureIcon  { width: 28px; height: 28px; color: #1ABC9C; }
+.featureTitle { color: #ffffff; font-weight: 700; font-size: 1rem; margin-bottom: 0.5rem; }
+.featureDesc  { color: rgba(255,255,255,0.6); font-size: 0.8rem; line-height: 1.5; }
 
 /* ==================== Primary Button ==================== */
 .primaryButton {
-  background: linear-gradient(135deg, #1ABC9C, #16a085);
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1ABC9C, #16a085, #1ABC9C);
+  background-size: 200% auto;
   color: #ffffff;
   font-weight: 700;
   font-size: 1rem;
-  padding: 0.875rem 2rem;
-  border-radius: 0.75rem;
+  padding: 1rem 2.5rem;
+  border-radius: 1rem;
   border: none;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
-  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
-  min-width: 240px;
+  box-shadow: 0 10px 30px -5px rgba(26,188,156,0.5);
+  transition: all 0.4s ease;
+  min-width: 260px;
+  letter-spacing: 0.02em;
+}
+
+.primaryButton::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .primaryButton:hover {
-  background: linear-gradient(135deg, #16a085, #1ABC9C);
-  transform: translateY(-2px);
-  box-shadow: 0 20px 25px -10px rgba(26, 188, 156, 0.4);
+  background-position: right center;
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px -10px rgba(26,188,156,0.6);
 }
 
-.primaryButton:active {
-  transform: translateY(0);
-}
+.primaryButton:hover::before { opacity: 1; }
+.primaryButton:active { transform: translateY(-1px); }
 
 /* ==================== Form Card ==================== */
 .formCard {
   background: #ffffff;
-  border-radius: 1rem;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border-radius: 1.25rem;
+  box-shadow: 0 25px 60px -12px rgba(0,0,0,0.35);
   overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.1);
 }
 
-.formContent {
-  padding: 2rem;
-}
+.formContent { padding: 2rem; }
 
 /* ==================== Input Styles ==================== */
-.inputWrapper {
-  position: relative;
-  width: 100%;
-}
+.inputWrapper { position: relative; width: 100%; }
 
 .inputIcon {
   position: absolute;
@@ -233,41 +181,32 @@
   height: 1.25rem;
 }
 
-:global([dir="rtl"]) .inputIcon {
-  left: auto;
-  right: 1rem;
-}
+:global([dir="rtl"]) .inputIcon { left: auto; right: 1rem; }
 
 .inputField {
   width: 100%;
   padding: 0.75rem 1rem 0.75rem 2.75rem;
   border: 2px solid #e2e8f0;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   font-size: 0.875rem;
-  transition: all 0.2s ease;
-  background: #ffffff;
+  transition: all 0.25s ease;
+  background: #f8fafc;
   color: #2C3E50;
 }
 
-:global([dir="rtl"]) .inputField {
-  padding: 0.75rem 2.75rem 0.75rem 1rem;
-}
+:global([dir="rtl"]) .inputField { padding: 0.75rem 2.75rem 0.75rem 1rem; }
 
 .inputField:focus {
   outline: none;
   border-color: #1ABC9C;
-  box-shadow: 0 0 0 3px rgba(26, 188, 156, 0.1);
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(26,188,156,0.12);
 }
 
-.inputField:hover {
-  border-color: #94a3b8;
-}
+.inputField:hover:not(:focus) { border-color: #94a3b8; background: #ffffff; }
 
 /* ==================== Password Styles ==================== */
-.passwordWrapper {
-  position: relative;
-  width: 100%;
-}
+.passwordWrapper { position: relative; width: 100%; }
 
 .passwordLockIcon {
   position: absolute;
@@ -281,31 +220,27 @@
   height: 1.25rem;
 }
 
-:global([dir="rtl"]) .passwordLockIcon {
-  left: auto;
-  right: 1rem;
-}
+:global([dir="rtl"]) .passwordLockIcon { left: auto; right: 1rem; }
 
 .passwordInput {
   width: 100%;
-  padding: 0.75rem 2.75rem 0.75rem 2.75rem;
+  padding: 0.75rem 2.75rem;
   border: 2px solid #e2e8f0;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   font-size: 0.875rem;
-  transition: all 0.2s ease;
-  background: #ffffff;
+  transition: all 0.25s ease;
+  background: #f8fafc;
   color: #2C3E50;
-}
-
-:global([dir="rtl"]) .passwordInput {
-  padding: 0.75rem 2.75rem 0.75rem 2.75rem;
 }
 
 .passwordInput:focus {
   outline: none;
   border-color: #1ABC9C;
-  box-shadow: 0 0 0 3px rgba(26, 188, 156, 0.1);
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(26,188,156,0.12);
 }
+
+.passwordInput:hover:not(:focus) { border-color: #94a3b8; background: #ffffff; }
 
 .passwordToggle {
   position: absolute;
@@ -326,20 +261,14 @@
   height: 1.5rem;
 }
 
-:global([dir="rtl"]) .passwordToggle {
-  right: auto;
-  left: 1rem;
-}
-
-.passwordToggle:hover {
-  color: #1ABC9C;
-}
+:global([dir="rtl"]) .passwordToggle { right: auto; left: 1rem; }
+.passwordToggle:hover { color: #1ABC9C; }
 
 /* ==================== Alerts ==================== */
 .successAlert {
   background: #ecfdf5;
   border-right: 4px solid #1ABC9C;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   padding: 1rem;
   margin-bottom: 1.5rem;
   display: flex;
@@ -350,7 +279,7 @@
 .errorAlert {
   background: #fef2f2;
   border-right: 4px solid #ef4444;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   padding: 1rem;
   margin-bottom: 1.5rem;
   display: flex;
@@ -358,45 +287,33 @@
   gap: 0.75rem;
 }
 
-.alertIcon {
-  flex-shrink: 0;
-  width: 1.25rem;
-  height: 1.25rem;
-}
-
-.alertText {
-  font-size: 0.875rem;
-  margin: 0;
-}
-
-.successText {
-  color: #065f46;
-}
-
-.errorText {
-  color: #dc2626;
-}
+.alertIcon  { flex-shrink: 0; width: 1.25rem; height: 1.25rem; }
+.alertText  { font-size: 0.875rem; margin: 0; }
+.successText { color: #065f46; }
+.errorText   { color: #dc2626; }
 
 /* ==================== Password Strength ==================== */
 .strengthBar {
-  height: 4px;
-  border-radius: 2px;
-  transition: all 0.3s ease;
+  height: 5px;
+  border-radius: 9999px;
+  transition: all 0.4s ease;
   margin-top: 0.5rem;
 }
 
 .strengthText {
   font-size: 0.7rem;
   margin-top: 0.25rem;
+  font-weight: 600;
   transition: color 0.3s ease;
 }
 
 /* ==================== Code Input ==================== */
 .codeInput {
   font-family: 'Courier New', monospace;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.15em;
   text-align: center;
   font-size: 1rem;
+  font-weight: 600;
 }
 
 /* ==================== Activate Button ==================== */
@@ -405,11 +322,23 @@
   overflow: hidden;
   cursor: pointer;
   transition: all 0.3s ease;
+  border-radius: 0.75rem !important;
 }
+
+.activateButton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.activateButton:hover::after { opacity: 1; }
 
 .activateButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 15px 30px -8px rgba(26,188,156,0.5) !important;
 }
 
 .activateButton:disabled {
@@ -418,21 +347,9 @@
   transform: none;
 }
 
-/* ==================== Icon Pulse ==================== */
-.iconPulse {
-  animation: pulse 2s infinite;
-}
-
-/* ==================== Forms Grid ==================== */
-.formGrid {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.formFieldFull {
-  width: 100%;
-}
+/* ==================== Forms ==================== */
+.formGrid    { display: flex; flex-direction: column; gap: 1.25rem; }
+.formFieldFull { width: 100%; }
 
 .formLabel {
   display: block;
@@ -442,16 +359,9 @@
   margin-bottom: 0.5rem;
 }
 
-.formLabel span {
-  color: #ef4444;
-}
+.formLabel span { color: #ef4444; }
 
-/* ==================== Buttons Container ==================== */
-.formActions {
-  display: flex;
-  gap: 1rem;
-  margin-top: 0.5rem;
-}
+.formActions { display: flex; gap: 1rem; margin-top: 0.5rem; }
 
 .saveButton {
   flex: 1;
@@ -459,14 +369,16 @@
   color: #ffffff;
   font-weight: 600;
   padding: 0.75rem;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   border: none;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
 }
 
 .saveButton:hover {
   background: linear-gradient(135deg, #16a085, #1ABC9C);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px -4px rgba(26,188,156,0.4);
 }
 
 .cancelButton {
@@ -475,115 +387,37 @@
   color: #2C3E50;
   font-weight: 600;
   padding: 0.75rem;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   border: 1px solid #e2e8f0;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
 }
 
-.cancelButton:hover {
-  background: #e2e8f0;
-}
+.cancelButton:hover { background: #e2e8f0; }
 
-/* ==================== Responsive Design ==================== */
+/* ==================== Responsive ==================== */
 @media (max-width: 768px) {
-  .logoContainerLarge {
-    width: 96px;
-    height: 96px;
-    border-radius: 28px;
-  }
-  
-  .logoContainerMedium {
-    width: 80px;
-    height: 80px;
-    border-radius: 20px;
-  }
-  
-  .logoImageLarge {
-    width: 96px;
-    height: 96px;
-  }
-  
-  .logoImageMedium {
-    width: 80px;
-    height: 80px;
-  }
-  
-  .title {
-    font-size: 1.5rem;
-  }
-  
-  .subtitle {
-    font-size: 0.75rem;
-  }
-  
-  .featureCard {
-    padding: 1rem;
-  }
-  
-  .featureIconWrapper {
-    width: 48px;
-    height: 48px;
-  }
-  
-  .featureIcon {
-    width: 24px;
-    height: 24px;
-  }
-  
-  .featureTitle {
-    font-size: 1rem;
-  }
-  
-  .featureDesc {
-    font-size: 0.75rem;
-  }
-  
-  .primaryButton {
-    padding: 0.75rem 1.5rem;
-    font-size: 0.875rem;
-    min-width: 200px;
-  }
-  
-  .formContent {
-    padding: 1.5rem;
-  }
+  .logoContainerLarge  { width: 96px; height: 96px; border-radius: 28px; }
+  .logoContainerMedium { width: 80px; height: 80px; border-radius: 20px; }
+  .logoImageLarge      { width: 96px; height: 96px; }
+  .logoImageMedium     { width: 80px; height: 80px; }
+  .title               { font-size: 1.5rem; }
+  .subtitle            { font-size: 0.75rem; }
+  .featureCard         { padding: 1.25rem 1rem; }
+  .featureIconWrapper  { width: 52px; height: 52px; }
+  .featureIcon         { width: 24px; height: 24px; }
+  .featureTitle        { font-size: 0.95rem; }
+  .featureDesc         { font-size: 0.75rem; }
+  .primaryButton       { padding: 0.875rem 1.75rem; font-size: 0.9rem; min-width: 220px; }
+  .formContent         { padding: 1.5rem; }
 }
 
 @media (max-width: 480px) {
-  .logoContainerLarge {
-    width: 80px;
-    height: 80px;
-    border-radius: 24px;
-  }
-  
-  .logoContainerMedium {
-    width: 72px;
-    height: 72px;
-    border-radius: 18px;
-  }
-  
-  .logoImageLarge {
-    width: 80px;
-    height: 80px;
-  }
-  
-  .logoImageMedium {
-    width: 72px;
-    height: 72px;
-  }
-  
-  .primaryButton {
-    padding: 0.6rem 1rem;
-    font-size: 0.75rem;
-    min-width: 160px;
-  }
-  
-  .formContent {
-    padding: 1rem;
-  }
-  
-  .formActions {
-    flex-direction: column;
-  }
+  .logoContainerLarge  { width: 80px; height: 80px; border-radius: 24px; }
+  .logoContainerMedium { width: 72px; height: 72px; border-radius: 18px; }
+  .logoImageLarge      { width: 80px; height: 80px; }
+  .logoImageMedium     { width: 72px; height: 72px; }
+  .primaryButton       { padding: 0.75rem 1.25rem; font-size: 0.85rem; min-width: 180px; }
+  .formContent         { padding: 1.25rem; }
+  .formActions         { flex-direction: column; }
 }
