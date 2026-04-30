@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --webpack",
-    "build": "node --max-old-space-size=4096 node_modules/next/dist/bin/next build --webpack",
+    "build": "next build --webpack && node script/copy-messages.js",
     "start": "next start",
     "lint": "eslint"
   },
@@ -38,13 +38,5 @@
     "eslint-config-next": "16.1.6",
     "tailwindcss": "^4",
     "typescript": "^5"
-  },
-  {
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build && node script/copy-messages.js", // <--- أضف هذا الجزء
-    "start": "next start",
-    "lint": "next lint"
   }
-}
 }
