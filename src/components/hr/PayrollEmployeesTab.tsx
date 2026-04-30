@@ -9,7 +9,7 @@ type Props = {
 // src/components/hr/PayrollEmployeesTab.tsx
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useTranslations } from 'next-intl';
+
 import TableActions from '@/components/TableActions';
 import styles from '@/styles/pages/hr.module.css';
 

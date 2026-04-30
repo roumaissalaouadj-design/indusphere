@@ -7,7 +7,7 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 import { useState, useEffect } from 'react';
-import { useTranslations } from 'next-intl';
+
 import styles from '@/styles/pages/hr.module.css';
 
 interface Employee {

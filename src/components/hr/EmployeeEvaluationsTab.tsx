@@ -8,7 +8,7 @@ type Props = {
 };
 // src/components/hr/EmployeeEvaluationsTab.tsx
 import { useState, useEffect } from 'react';
-import { useTranslations } from 'next-intl';
+
 import styles from '@/styles/pages/employee-evaluations.module.css';
 
 interface Employee {
@@ -441,4 +441,5 @@ export default function EmployeeEvaluationsTab({ params }: Props) {
       </div>
     </div>
   );
-}
+}   
+ 
