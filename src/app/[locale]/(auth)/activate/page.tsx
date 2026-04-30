@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import Image from 'next/image';
 import { User, Building2, Mail, Lock, Key, Eye, EyeOff, AlertCircle, CheckCircle, Shield, Award, Rocket, ArrowRight } from 'lucide-react';
 import styles from '@/styles/pages/activate.module.css';
 
@@ -101,8 +102,13 @@ export default function ActivatePage({ params }: Props) {
     return (
       <div className="w-full max-w-2xl">
         <div className={`text-center ${styles.landingCard}`}>
+          {/* ✅ الشعار بدلاً من الأيقونة */}
           <div className={`inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-[#1ABC9C] to-[#16a085] rounded-3xl shadow-2xl mb-6 ${styles.iconPulse}`}>
-            <Shield className="w-12 h-12 text-white" />
+            <img 
+              src="/indusphere-logo.svg" 
+              alt="Indusphere Logo"
+              className="w-14 h-14 object-contain filter brightness-0 invert"
+            />
           </div>
 
           <h1 className="text-4xl font-bold text-white mb-4">
@@ -113,28 +119,31 @@ export default function ActivatePage({ params }: Props) {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center">
-              <div className="w-12 h-12 bg-[#1ABC9C]/20 rounded-lg flex items-center justify-center mx-auto mb-3">
-                <Shield className="w-6 h-6 text-[#1ABC9C]" />
+            {/* بطاقة الأمان */}
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/15 transition-all duration-300">
+              <div className="w-14 h-14 bg-[#1ABC9C]/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <Shield className="w-7 h-7 text-[#1ABC9C]" />
               </div>
-              <h3 className="text-white font-semibold mb-2">{t('secureTitle')}</h3>
-              <p className="text-gray-400 text-sm">{t('secureDesc')}</p>
+              <h3 className="text-white font-semibold text-lg mb-2">{t('secureTitle')}</h3>
+              <p className="text-gray-400 text-sm leading-relaxed">{t('secureDesc')}</p>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center">
-              <div className="w-12 h-12 bg-[#1ABC9C]/20 rounded-lg flex items-center justify-center mx-auto mb-3">
-                <Award className="w-6 h-6 text-[#1ABC9C]" />
+            {/* بطاقة الدعم */}
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/15 transition-all duration-300">
+              <div className="w-14 h-14 bg-[#1ABC9C]/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <Award className="w-7 h-7 text-[#1ABC9C]" />
               </div>
-              <h3 className="text-white font-semibold mb-2">{t('supportTitle')}</h3>
-              <p className="text-gray-400 text-sm">{t('supportDesc')}</p>
+              <h3 className="text-white font-semibold text-lg mb-2">{t('supportTitle')}</h3>
+              <p className="text-gray-400 text-sm leading-relaxed">{t('supportDesc')}</p>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center">
-              <div className="w-12 h-12 bg-[#1ABC9C]/20 rounded-lg flex items-center justify-center mx-auto mb-3">
-                <Rocket className="w-6 h-6 text-[#1ABC9C]" />
+            {/* بطاقة البداية السريعة */}
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/15 transition-all duration-300">
+              <div className="w-14 h-14 bg-[#1ABC9C]/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <Rocket className="w-7 h-7 text-[#1ABC9C]" />
               </div>
-              <h3 className="text-white font-semibold mb-2">{t('quickStartTitle')}</h3>
-              <p className="text-gray-400 text-sm">{t('quickStartDesc')}</p>
+              <h3 className="text-white font-semibold text-lg mb-2">{t('quickStartTitle')}</h3>
+              <p className="text-gray-400 text-sm leading-relaxed">{t('quickStartDesc')}</p>
             </div>
           </div>
 
@@ -160,8 +169,13 @@ export default function ActivatePage({ params }: Props) {
   return (
     <div className="w-full max-w-md">
       <div className="text-center mb-8">
+        {/* ✅ الشعار في نموذج التفعيل */}
         <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-[#1ABC9C] to-[#16a085] rounded-2xl shadow-lg mb-4">
-          <Key className="w-10 h-10 text-white" />
+          <img 
+            src="/indusphere-logo.svg" 
+            alt="Indusphere Logo"
+            className="w-10 h-10 object-contain filter brightness-0 invert"
+          />
         </div>
         <h1 className="text-3xl font-bold text-white mb-2">{t('title')}</h1>
         <p className="text-gray-300 text-sm">{t('subtitle')}</p>
