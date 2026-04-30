@@ -1,10 +1,15 @@
-// src/app/[locale]/(auth)/layout.tsx
 'use client';
 
 import React, { use } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
+
+const languages = [
+  { code: 'ar', label: 'ع', flag: '🇩🇿' },
+  { code: 'fr', label: 'FR', flag: '🇫🇷' },
+  { code: 'en', label: 'EN', flag: '🇺🇸' },
+]
 
 export default function AuthLayout({
   children,
@@ -14,7 +19,6 @@ export default function AuthLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = use(params);
-  
   const pathname = usePathname();
   const router = useRouter();
 
@@ -25,53 +29,98 @@ export default function AuthLayout({
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#2C3E50] to-[#34495E] flex flex-col">
-      {/* Header */}
-      <header className="bg-white/10 backdrop-blur-md border-b border-white/20">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            {/* Logo */}
-            <Link href={`/${locale}`} className="flex items-center gap-2 group">
-              {/* ✅ Logo image */}
-              <div style={{
-                width: '40px',
-                height: '40px',
-                borderRadius: '8px',
-                overflow: 'hidden',
-                background: 'transparent',
-              }}>
-                <Image
-                  src="/indusphere-logo.png"
-                  alt="Indusphere Logo"
-                  width={40}
-                  height={40}
-                  style={{ 
-                    objectFit: 'contain',
-                    mixBlendMode: 'multiply'
-                  }}
-                />
-              </div>
-              <span className="text-xl font-bold text-white tracking-wider">
-                INDU<span className="text-[#1ABC9C]">SPHERE</span>
-              </span>
-            </Link>
 
-            {/* Language Switcher */}
-            <div className="flex gap-1 bg-[#2C3E50]/50 rounded-lg p-1 backdrop-blur-sm">
-              {['ar', 'fr', 'en'].map((lang) => (
-                <button
-                  key={lang}
-                  onClick={() => switchLanguage(lang)}
-                  className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all duration-200 ${
-                    locale === lang
-                      ? 'bg-[#1ABC9C] text-white shadow-lg'
-                      : 'text-gray-300 hover:text-white hover:bg-white/10'
-                  }`}
-                >
-                  {lang === 'ar' ? 'عربي' : lang === 'fr' ? 'Français' : 'English'}
-                </button>
-              ))}
+      {/* Header */}
+      <header style={{
+        backgroundColor: 'rgba(44,62,80,0.85)',
+        backdropFilter: 'blur(16px)',
+        borderBottom: '1px solid rgba(255,255,255,0.1)',
+        position: 'sticky',
+        top: 0,
+        zIndex: 50,
+      }}>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '0.625rem 1.5rem',
+          maxWidth: '1200px',
+          margin: '0 auto',
+          width: '100%',
+        }}>
+
+          {/* Logo */}
+          <Link href={`/${locale}`} style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.625rem',
+            textDecoration: 'none',
+          }}>
+            <div style={{
+              width: '42px',
+              height: '42px',
+              borderRadius: '10px',
+              overflow: 'hidden',
+              border: '2px solid rgba(26,188,156,0.4)',
+              boxShadow: '0 4px 14px rgba(26,188,156,0.3)',
+              flexShrink: 0,
+              transition: 'all 0.25s ease',
+            }}>
+              <Image
+                src="/indusphere-logo.png"
+                alt="Indusphere Logo"
+                width={42}
+                height={42}
+                style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+              />
             </div>
+            <span style={{
+              fontSize: '1.25rem',
+              fontWeight: 800,
+              color: '#ffffff',
+              letterSpacing: '0.05em',
+              whiteSpace: 'nowrap',
+            }}>
+              INDU<span style={{ color: '#1ABC9C' }}>SPHERE</span>
+            </span>
+          </Link>
+
+          {/* Language Switcher */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '3px',
+            backgroundColor: 'rgba(255,255,255,0.06)',
+            border: '1px solid rgba(255,255,255,0.12)',
+            borderRadius: '0.75rem',
+            padding: '4px',
+          }}>
+            {languages.map((lang) => (
+              <button
+                key={lang.code}
+                onClick={() => switchLanguage(lang.code)}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '5px',
+                  padding: '5px 10px',
+                  borderRadius: '0.5rem',
+                  fontSize: '0.75rem',
+                  fontWeight: 600,
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  backgroundColor: locale === lang.code ? 'rgba(26,188,156,0.2)' : 'transparent',
+                  color: locale === lang.code ? '#1ABC9C' : 'rgba(255,255,255,0.6)',
+                  boxShadow: locale === lang.code ? '0 0 0 1px rgba(26,188,156,0.4)' : 'none',
+                }}
+              >
+                <span style={{ fontSize: '1rem', lineHeight: 1 }}>{lang.flag}</span>
+                <span style={{ fontSize: '0.72rem', fontWeight: 700 }}>{lang.label}</span>
+              </button>
+            ))}
           </div>
+
         </div>
       </header>
 
@@ -81,17 +130,22 @@ export default function AuthLayout({
       </main>
 
       {/* Footer */}
-      <footer className="bg-[#2C3E50]/80 backdrop-blur-sm border-t border-white/10 py-4">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-gray-400 text-sm">
-            © {new Date().getFullYear()} INDU<span className="text-[#1ABC9C]">SPHERE</span> — 
-            <span className="mx-2">•</span>
-            {locale === 'ar' && 'جميع الحقوق محفوظة'}
-            {locale === 'fr' && 'Tous droits réservés'}
-            {locale === 'en' && 'All rights reserved'}
-          </p>
-        </div>
+      <footer style={{
+        backgroundColor: 'rgba(44,62,80,0.8)',
+        backdropFilter: 'blur(8px)',
+        borderTop: '1px solid rgba(255,255,255,0.08)',
+        padding: '1rem',
+        textAlign: 'center',
+      }}>
+        <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.8rem' }}>
+          © {new Date().getFullYear()} INDU<span style={{ color: '#1ABC9C' }}>SPHERE</span>
+          <span style={{ margin: '0 0.5rem' }}>•</span>
+          {locale === 'ar' && 'جميع الحقوق محفوظة'}
+          {locale === 'fr' && 'Tous droits réservés'}
+          {locale === 'en' && 'All rights reserved'}
+        </p>
       </footer>
+
     </div>
   );
 }
