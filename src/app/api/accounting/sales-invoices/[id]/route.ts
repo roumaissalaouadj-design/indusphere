@@ -1,6 +1,6 @@
 // src/app/api/accounting/sales-invoices/[id]/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-import { getToken } from 'next-auth/jwt';
+import { auth } from "@/auth";
 import { connectDB } from '@/lib/mongodb';
 import SalesInvoice from '@/models/SalesInvoice';
 import Customer from '@/models/Customer';
@@ -10,8 +10,8 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
-    if (!token) {
+    const session = await auth();
+    if (!session) {
       return NextResponse.json({ success: false, message: 'غير مصرح' }, { status: 401 });
     }
 
@@ -39,8 +39,8 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
-    if (!token) {
+    const session = await auth();
+    if (!session) {
       return NextResponse.json({ success: false, message: 'غير مصرح' }, { status: 401 });
     }
 

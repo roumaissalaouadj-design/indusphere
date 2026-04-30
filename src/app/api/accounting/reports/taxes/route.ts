@@ -1,14 +1,14 @@
 // src/app/api/accounting/reports/taxes/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-import { getToken } from 'next-auth/jwt';
+import { auth } from '@/auth';
 import { connectDB } from '@/lib/mongodb';
 import TaxDeclaration from '@/models/TaxDeclaration';
 import TaxTransaction from '@/models/TaxTransaction';
 
 export async function GET(request: NextRequest) {
   try {
-    const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
-    if (!token) {
+    const session = await auth();
+    if (!session) {
       return NextResponse.json({ success: false, message: 'غير مصرح' }, { status: 401 });
     }
 

@@ -1,13 +1,13 @@
 // src/app/api/accounting/product-prices/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-import { getToken } from 'next-auth/jwt';
+import { auth } from '@/auth';
 import { connectDB } from '@/lib/mongodb';
 import ProductPrice from '@/models/ProductPrice';
 
 export async function GET(request: NextRequest) {
   try {
-    const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
-    if (!token) {
+    const session = await auth();
+    if (!session) {
       return NextResponse.json({ success: false, message: 'غير مصرح' }, { status: 401 });
     }
 
@@ -38,8 +38,8 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
-    if (!token) {
+    const session = await auth();
+    if (!session) {
       return NextResponse.json({ success: false, message: 'غير مصرح' }, { status: 401 });
     }
 

@@ -1,17 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getToken } from 'next-auth/jwt';
+import { auth } from '@/auth';
 import { connectDB } from '@/lib/mongodb';
 import Supplier from '@/models/Supplier';
 
 export async function GET(request: NextRequest) {
   try {
-    const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
-    if (!token) {
+    const session = await auth();
+    if (!session) {
       return NextResponse.json({ success: false, message: 'غير مصرح' }, { status: 401 });
     }
 
-    // ✅ استخراج tenantId من التوكن
-    const tenantId = token.tenantId;
+    // ✅ استخراج tenantId من الجلسة
+    const tenantId = session.user.tenantId;
     if (!tenantId) {
       return NextResponse.json({ success: false, message: 'لا يوجد مصنع مرتبط بالحساب' }, { status: 400 });
     }
@@ -23,7 +23,6 @@ export async function GET(request: NextRequest) {
     const isActive = searchParams.get('isActive');
     const search = searchParams.get('search');
 
-    // ✅ إضافة tenantId إلى الاستعلام
     const query: Record<string, unknown> = { tenantId };
 
     if (category && category !== 'all') {
@@ -53,13 +52,12 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
-    if (!token) {
+    const session = await auth();
+    if (!session) {
       return NextResponse.json({ success: false, message: 'غير مصرح' }, { status: 401 });
     }
 
-    // ✅ استخراج tenantId من التوكن
-    const tenantId = token.tenantId;
+    const tenantId = session.user.tenantId;
     if (!tenantId) {
       return NextResponse.json({ success: false, message: 'لا يوجد مصنع مرتبط بالحساب' }, { status: 400 });
     }
@@ -75,7 +73,6 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // ✅ التحقق من وجود الكود أو الرقم الضريبي في نفس tenantId فقط
     const existingSupplier = await Supplier.findOne({
       tenantId,
       $or: [{ code: body.code }, { taxNumber: body.taxNumber }]
@@ -85,7 +82,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: false, message: 'الكود أو الرقم الضريبي موجود مسبقاً' }, { status: 400 });
     }
 
-    // ✅ إضافة tenantId إلى البيانات الجديدة
     const supplier = await Supplier.create({
       ...body,
       tenantId,
