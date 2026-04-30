@@ -28,11 +28,6 @@
   align-items: center;
   gap: 0.625rem;
   text-decoration: none;
-  transition: transform 0.25s ease;
-}
-
-.logoLink:hover {
-  transform: scale(1.03);
 }
 
 .logoImgWrapper {
@@ -43,20 +38,15 @@
   border: 2px solid rgba(26,188,156,0.35);
   box-shadow: 0 4px 12px rgba(26,188,156,0.25);
   flex-shrink: 0;
-  transition: all 0.25s ease;
-  background: rgba(255,255,255,0.95);
-}
-
-.logoLink:hover .logoImgWrapper {
-  border-color: rgba(26,188,156,0.7);
-  box-shadow: 0 6px 18px rgba(26,188,156,0.4);
+  background: transparent;
 }
 
 .logoImg {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  padding: 3px;
+  object-fit: cover;
+  object-position: center;
+  padding: 0;
 }
 .logoText {
   font-size: 1.25rem;
