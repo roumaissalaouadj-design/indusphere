@@ -71,7 +71,7 @@ export default function AuthLayout({
                 alt="Indusphere Logo"
                 width={42}
                 height={42}
-                style={{ objectFit: 'contain', width: '100%', height: '100%', padding: '3px' }}
+                style={{ objectFit: 'cover', width: '100%', height: '100%' }}
               />
             </div>
             <span style={{
