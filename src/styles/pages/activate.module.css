@@ -1,4 +1,6 @@
 /* src/styles/pages/activate.module.css */
+
+/* ==================== Animations ==================== */
 .card {
   animation: fadeInUp 0.5s ease-out;
 }
@@ -29,7 +31,96 @@
   }
 }
 
-/* Input Wrapper */
+/* ==================== Logo Container ==================== */
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1ABC9C, #16a085);
+  border-radius: 1.5rem;
+  margin: 0 auto;
+  box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.2);
+}
+
+.logoImage {
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* ==================== Feature Cards ==================== */
+.featureCard {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.featureCard:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-4px);
+  border-color: rgba(26, 188, 156, 0.3);
+}
+
+.featureIconWrapper {
+  width: 3.5rem;
+  height: 3.5rem;
+  background: rgba(26, 188, 156, 0.2);
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem auto;
+}
+
+.featureIcon {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: #1ABC9C;
+}
+
+.featureTitle {
+  color: white;
+  font-weight: 600;
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
+}
+
+.featureDesc {
+  color: #9ca3af;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* ==================== Buttons ==================== */
+.primaryButton {
+  background: linear-gradient(135deg, #1ABC9C, #16a085);
+  color: white;
+  font-weight: bold;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.primaryButton:hover {
+  background: linear-gradient(135deg, #16a085, #1ABC9C);
+  transform: scale(1.02);
+}
+
+.primaryButton:active {
+  transform: scale(0.98);
+}
+
+/* ==================== Input Wrapper ==================== */
 .inputWrapper {
   position: relative;
   width: 100%;
@@ -73,7 +164,11 @@
   box-shadow: 0 0 0 3px rgba(26, 188, 156, 0.1);
 }
 
-/* Password Wrapper */
+.inputField:hover {
+  border-color: #cbd5e1;
+}
+
+/* ==================== Password Wrapper ==================== */
 .passwordWrapper {
   position: relative;
   width: 100%;
@@ -145,8 +240,10 @@
   color: #1ABC9C;
 }
 
+/* ==================== Alerts ==================== */
 .alert {
   animation: slideDown 0.3s ease-out;
+  border-right-width: 4px;
 }
 
 @keyframes slideDown {
@@ -160,6 +257,7 @@
   }
 }
 
+/* ==================== Password Strength ==================== */
 .strengthBar {
   height: 4px;
   border-radius: 2px;
@@ -173,6 +271,7 @@
   transition: color 0.3s ease;
 }
 
+/* ==================== Code Input ==================== */
 .codeInput {
   font-family: 'Courier New', monospace;
   letter-spacing: 0.1em;
@@ -180,9 +279,11 @@
   font-size: 1rem;
 }
 
+/* ==================== Activate Button ==================== */
 .activateButton {
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .activateButton::before {
@@ -203,6 +304,12 @@
   height: 300px;
 }
 
+.activateButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ==================== Icon Pulse Animation ==================== */
 .iconPulse {
   animation: pulse 2s infinite;
 }
@@ -216,5 +323,49 @@
   }
   100% {
     transform: scale(1);
+  }
+}
+
+/* ==================== Responsive Design ==================== */
+@media (max-width: 768px) {
+  .landingCard {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .featureCard {
+    padding: 1rem;
+  }
+  
+  .featureIconWrapper {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  
+  .featureIcon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+  
+  .featureTitle {
+    font-size: 1rem;
+  }
+  
+  .featureDesc {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .primaryButton {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+  
+  .inputField,
+  .passwordInput {
+    font-size: 0.75rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
   }
 }
