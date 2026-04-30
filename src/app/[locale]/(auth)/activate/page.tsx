@@ -1,12 +1,17 @@
 // src/app/[locale]/(auth)/activate/page.tsx
 'use client';
 
+import { use } from 'react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { User, Building2, Mail, Lock, Key, Eye, EyeOff, AlertCircle, CheckCircle, Shield, Award, Rocket, ArrowRight } from 'lucide-react';
 import styles from '@/styles/pages/activate.module.css';
+
+type Props = {
+  params: Promise<{ locale: string }>;
+};
 
 type PasswordStrength = 'weak' | 'fair' | 'strong' | null;
 
@@ -23,9 +28,9 @@ function getPasswordStrength(password: string): PasswordStrength {
   return 'strong';
 }
 
-export default function ActivatePage() {
+export default function ActivatePage({ params }: Props) {
+  const { locale } = use(params);
   const router = useRouter();
-  const locale = useLocale();
   const t = useTranslations('Activate');
   const tCommon = useTranslations('Common');
   const isRTL = locale === 'ar';

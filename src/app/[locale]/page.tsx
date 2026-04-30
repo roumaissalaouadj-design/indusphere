@@ -1,15 +1,20 @@
 // src/app/[locale]/page.tsx
 'use client';
 
+import { use } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import { useTranslations, useLocale } from 'next-intl';
-import { Factory, LogIn, Key, ArrowRight, Languages } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { Factory, LogIn, Key, ArrowRight } from 'lucide-react';
 import styles from '@/styles/pages/landing.module.css';
 
-export default function LandingPage() {
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export default function LandingPage({ params }: Props) {
+  const { locale } = use(params);
   const router = useRouter();
   const pathname = usePathname();
-  const locale = useLocale();
   const t = useTranslations('Landing');
   const isRTL = locale === 'ar';
 

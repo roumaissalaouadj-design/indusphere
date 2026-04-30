@@ -1,5 +1,11 @@
-'use client'
+'use client';
 
+import { use } from 'react';
+import { useTranslations } from 'next-intl';
+
+type Props = {
+  params: Promise<{ locale: string }>;
+};
 import { useSession } from 'next-auth/react'
 import { useRouter, usePathname } from 'next/navigation'
 import { useLocale } from 'next-intl'
@@ -13,7 +19,7 @@ const languages = [
   { code: 'en', label: 'EN' },
 ]
 
-export default function Header() {
+export default function Header({ params }: Props) {
   const { data: session } = useSession()
   const router = useRouter()
   const locale = useLocale()

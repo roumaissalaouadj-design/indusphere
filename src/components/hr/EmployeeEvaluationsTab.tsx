@@ -1,8 +1,14 @@
-// src/components/hr/EmployeeEvaluationsTab.tsx
 'use client';
 
+import { use } from 'react';
+import { useTranslations } from 'next-intl';
+
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+// src/components/hr/EmployeeEvaluationsTab.tsx
 import { useState, useEffect } from 'react';
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import styles from '@/styles/pages/employee-evaluations.module.css';
 
 interface Employee {
@@ -37,8 +43,8 @@ interface Evaluation {
   status: string;
 }
 
-export default function EmployeeEvaluationsTab() {
-  const locale = useLocale();
+export default function EmployeeEvaluationsTab({ params }: Props) {
+  const { locale } = use(params);
   const t = useTranslations('Evaluations');
   const tCommon = useTranslations('Common');
   

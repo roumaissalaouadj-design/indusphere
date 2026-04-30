@@ -1,16 +1,21 @@
 // src/app/[locale]/(auth)/login/page.tsx
 'use client';
 
+import { use } from 'react';
 import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { signIn } from 'next-auth/react';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { Mail, Lock, Eye, EyeOff, AlertCircle, CheckCircle } from 'lucide-react';
 import styles from '@/styles/pages/login.module.css';
 
-export default function LoginPage() {
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export default function LoginPage({ params }: Props) {
+  const { locale } = use(params);
   const router = useRouter();
-  const locale = useLocale();
   const searchParams = useSearchParams();
   const registered = searchParams.get('registered');
   const t = useTranslations('Auth');

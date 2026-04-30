@@ -1,11 +1,17 @@
 'use client';
 
+import { use } from 'react';
+import { useTranslations } from 'next-intl';
+
+type Props = {
+  params: Promise<{ locale: string }>;
+};
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { logout } from '@/app/actions/auth';
 import { usePermissions } from '@/hooks/usePermissions';
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import styles from '@/styles/components/Sidebar.module.css';
 
 interface SidebarProps {
@@ -16,7 +22,7 @@ interface SidebarProps {
 
 export default function Sidebar({ mobileOpen = false, onMobileClose, onCollapsedChange }: SidebarProps) {
   const pathname = usePathname();
-  const locale = useLocale();
+  const { locale } = use(params);
   const t = useTranslations('Nav');
   const tAccounting = useTranslations('Accounting');
   const [collapsed, setCollapsed] = useState(false);

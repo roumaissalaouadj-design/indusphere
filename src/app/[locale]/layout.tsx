@@ -7,13 +7,12 @@ import '@/styles/globals.css';
 
 type Props = {
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;  // ✅ يجب أن يكون Promise
 };
 
 export default async function LocaleLayout({ children, params }: Props) {
-  const { locale } = params;
+  const { locale } = await params;  // ✅ انتظار الـ Promise
   
-  // التحقق من صحة اللغة
   if (!routing.locales.includes(locale as Locale)) {
     notFound();
   }

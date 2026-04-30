@@ -1,7 +1,13 @@
 'use client';
 
+import { use } from 'react';
+import { useTranslations } from 'next-intl';
+
+type Props = {
+  params: Promise<{ locale: string }>;
+};
 import { useState, useEffect } from 'react';
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import styles from '@/styles/pages/hr.module.css';
 
 interface Employee {
@@ -22,8 +28,8 @@ interface SalaryPayment {
   paymentMethod: string;
 }
 
-export default function SalaryPaymentsTab() {
-  const locale = useLocale();
+export default function SalaryPaymentsTab({ params }: Props) {
+  const { locale } = use(params);
   const t = useTranslations('Common');
   const tAccounting = useTranslations('Accounting');
   

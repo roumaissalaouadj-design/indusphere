@@ -1,9 +1,15 @@
-// src/components/hr/PayrollEmployeesTab.tsx
 'use client';
 
+import { use } from 'react';
+import { useTranslations } from 'next-intl';
+
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+// src/components/hr/PayrollEmployeesTab.tsx
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import TableActions from '@/components/TableActions';
 import styles from '@/styles/pages/hr.module.css';
 
@@ -41,9 +47,9 @@ interface PayrollEmployee {
   isActive: boolean;
 }
 
-export default function PayrollEmployeesTab() {
+export default function PayrollEmployeesTab({ params }: Props) {
   const router = useRouter();
-  const locale = useLocale();
+  const { locale } = use(params);
   const t = useTranslations('Common');
   const tAccounting = useTranslations('Accounting');
   
