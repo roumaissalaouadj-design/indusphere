@@ -104,12 +104,12 @@ export default function ActivatePage({ params }: Props) {
         <div className={`text-center ${styles.landingCard}`}>
           {/* ✅ الشعار بدلاً من الأيقونة */}
           <div className={`inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-[#1ABC9C] to-[#16a085] rounded-3xl shadow-2xl mb-6 ${styles.iconPulse}`}>
-            <img 
-              src="/indusphere-logo.svg" 
-              alt="Indusphere Logo"
-              className="w-14 h-14 object-contain filter brightness-0 invert"
-            />
-          </div>
+  <img 
+    src="/indusphere-logo.png" 
+    alt="Indusphere Logo"
+    className="w-14 h-14 object-contain filter brightness-0 invert"
+  />
+</div>
 
           <h1 className="text-4xl font-bold text-white mb-4">
             {t('title')}
@@ -171,12 +171,12 @@ export default function ActivatePage({ params }: Props) {
       <div className="text-center mb-8">
         {/* ✅ الشعار في نموذج التفعيل */}
         <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-[#1ABC9C] to-[#16a085] rounded-2xl shadow-lg mb-4">
-          <img 
-            src="/indusphere-logo.svg" 
-            alt="Indusphere Logo"
-            className="w-10 h-10 object-contain filter brightness-0 invert"
-          />
-        </div>
+  <img 
+    src="/indusphere-logo.png" 
+    alt="Indusphere Logo"
+    className="w-10 h-10 object-contain filter brightness-0 invert"
+  />
+</div>
         <h1 className="text-3xl font-bold text-white mb-2">{t('title')}</h1>
         <p className="text-gray-300 text-sm">{t('subtitle')}</p>
       </div>
