@@ -18,6 +18,7 @@
 
 .landingCard {
   animation: fadeInScale 0.6s ease-out;
+  text-align: center;
 }
 
 @keyframes fadeInScale {
@@ -31,20 +32,53 @@
   }
 }
 
-/* ==================== Logo Container ==================== */
-.logoWrapper {
+/* ==================== Logo Styles ==================== */
+
+/* حاوية الشعار */
+.logoContainer {
   display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, #1ABC9C, #16a085);
-  border-radius: 1.5rem;
-  margin: 0 auto;
   box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.2);
+  margin: 0 auto 1.5rem auto;
+  overflow: hidden;
 }
 
+/* حاوية الشعار للصفحة الرئيسية (حجم كبير) */
+.logoContainerLarge {
+  width: 112px;
+  height: 112px;
+  border-radius: 28px;
+}
+
+/* حاوية الشعار للنموذج (حجم متوسط) */
+.logoContainerMedium {
+  width: 88px;
+  height: 88px;
+  border-radius: 20px;
+}
+
+/* صورة الشعار */
 .logoImage {
-  object-fit: contain;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* صورة الشعار في الصفحة الرئيسية */
+.logoImageLarge {
+  width: 112px;
+  height: 112px;
+  object-fit: cover;
+}
+
+/* صورة الشعار في النموذج */
+.logoImageMedium {
+  width: 88px;
+  height: 88px;
+  object-fit: cover;
 }
 
 /* ==================== Feature Cards ==================== */
@@ -65,10 +99,10 @@
 }
 
 .featureIconWrapper {
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 56px;
+  height: 56px;
   background: rgba(26, 188, 156, 0.2);
-  border-radius: 0.75rem;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -76,8 +110,8 @@
 }
 
 .featureIcon {
-  width: 1.75rem;
-  height: 1.75rem;
+  width: 28px;
+  height: 28px;
   color: #1ABC9C;
 }
 
@@ -94,12 +128,13 @@
   line-height: 1.5;
 }
 
-/* ==================== Buttons ==================== */
+/* ==================== Primary Button ==================== */
 .primaryButton {
   background: linear-gradient(135deg, #1ABC9C, #16a085);
   color: white;
-  font-weight: bold;
-  padding: 0.75rem 1.5rem;
+  font-weight: 700;
+  font-size: 1.125rem;
+  padding: 1rem 2rem;
   border-radius: 0.75rem;
   transition: all 0.3s ease;
   border: none;
@@ -107,17 +142,23 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  gap: 0.75rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+  min-width: 220px;
 }
 
 .primaryButton:hover {
   background: linear-gradient(135deg, #16a085, #1ABC9C);
-  transform: scale(1.02);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
 }
 
 .primaryButton:active {
-  transform: scale(0.98);
+  transform: translateY(0);
+}
+
+.primaryButton span {
+  font-size: 1.125rem;
 }
 
 /* ==================== Input Wrapper ==================== */
@@ -328,6 +369,28 @@
 
 /* ==================== Responsive Design ==================== */
 @media (max-width: 768px) {
+  .logoContainerLarge {
+    width: 88px;
+    height: 88px;
+    border-radius: 22px;
+  }
+  
+  .logoContainerMedium {
+    width: 72px;
+    height: 72px;
+    border-radius: 16px;
+  }
+  
+  .logoImageLarge {
+    width: 88px;
+    height: 88px;
+  }
+  
+  .logoImageMedium {
+    width: 72px;
+    height: 72px;
+  }
+  
   .landingCard {
     margin: 1rem;
     padding: 1.5rem;
@@ -338,13 +401,13 @@
   }
   
   .featureIconWrapper {
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 48px;
+    height: 48px;
   }
   
   .featureIcon {
-    width: 1.25rem;
-    height: 1.25rem;
+    width: 24px;
+    height: 24px;
   }
   
   .featureTitle {
@@ -354,11 +417,26 @@
   .featureDesc {
     font-size: 0.75rem;
   }
+  
+  .primaryButton {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    min-width: 180px;
+  }
+  
+  .primaryButton span {
+    font-size: 1rem;
+  }
 }
 
 @media (max-width: 480px) {
   .primaryButton {
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.875rem;
+    min-width: 160px;
+  }
+  
+  .primaryButton span {
     font-size: 0.875rem;
   }
   
