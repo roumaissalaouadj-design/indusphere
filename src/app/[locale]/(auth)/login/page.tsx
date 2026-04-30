@@ -8,7 +8,7 @@ import { signIn } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { Mail, Lock, Eye, EyeOff, AlertCircle, CheckCircle } from 'lucide-react';
 import styles from '@/styles/pages/login.module.css';
-import activateStyles from '@/styles/pages/activate.module.css'
+
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -84,19 +84,27 @@ export default function LoginPage({ params }: Props) {
     <div className="w-full max-w-md">
       {/* Logo Section */}
       <div className="text-center mb-8">
-<div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl shadow-lg mb-4 overflow-hidden"
-  style={{ border: '2px solid rgba(26,188,156,0.4)', boxShadow: '0 4px 14px rgba(26,188,156,0.3)', background: 'rgba(255,255,255,0.95)' }}>
+<div style={{
+  width: '80px',
+  height: '80px',
+  borderRadius: '20px',
+  overflow: 'hidden',
+  border: '2px solid rgba(26,188,156,0.4)',
+  boxShadow: '0 4px 14px rgba(26,188,156,0.3)',
+  margin: '0 auto 1rem auto',
+}}>
   <img 
     src="/indusphere-logo.png" 
     alt="Indusphere Logo"
     style={{ 
-      width: '64px', 
-      height: '64px', 
-      objectFit: 'contain',
-      padding: '4px',
+      width: '100%', 
+      height: '100%', 
+      objectFit: 'cover',
+      objectPosition: 'center',
     }}
   />
 </div>
+
         <h1 className="text-3xl font-bold text-white mb-2">
           {getTitle()}
         </h1>
