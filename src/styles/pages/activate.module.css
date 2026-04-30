@@ -1,18 +1,5 @@
 /* src/styles/pages/activate.module.css */
 
-/* ==================== متغيرات الألوان ==================== */
-:root {
-  --primary: #1ABC9C;
-  --primary-dark: #16a085;
-  --primary-light: #48d1b8;
-  --dark: #2C3E50;
-  --dark-light: #34495e;
-  --white: #ffffff;
-  --gray-light: #f8fafc;
-  --gray: #e2e8f0;
-  --gray-dark: #94a3b8;
-}
-
 /* ==================== Animations ==================== */
 @keyframes fadeInUp {
   from {
@@ -62,15 +49,6 @@
   }
 }
 
-@keyframes shimmer {
-  0% {
-    background-position: -1000px 0;
-  }
-  100% {
-    background-position: 1000px 0;
-  }
-}
-
 .card {
   animation: fadeInUp 0.5s ease-out;
 }
@@ -85,7 +63,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  background: linear-gradient(135deg, #1ABC9C, #16a085);
   border-radius: 30px;
   margin: 0 auto 1.5rem auto;
   overflow: hidden;
@@ -131,7 +109,7 @@
 .title {
   font-size: 1.875rem;
   font-weight: 700;
-  color: var(--white);
+  color: #ffffff;
   margin-bottom: 0.5rem;
 }
 
@@ -180,11 +158,11 @@
 .featureIcon {
   width: 28px;
   height: 28px;
-  color: var(--primary);
+  color: #1ABC9C;
 }
 
 .featureTitle {
-  color: var(--white);
+  color: #ffffff;
   font-weight: 600;
   font-size: 1.125rem;
   margin-bottom: 0.5rem;
@@ -198,8 +176,8 @@
 
 /* ==================== Primary Button ==================== */
 .primaryButton {
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color: var(--white);
+  background: linear-gradient(135deg, #1ABC9C, #16a085);
+  color: #ffffff;
   font-weight: 700;
   font-size: 1rem;
   padding: 0.875rem 2rem;
@@ -216,7 +194,7 @@
 }
 
 .primaryButton:hover {
-  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+  background: linear-gradient(135deg, #16a085, #1ABC9C);
   transform: translateY(-2px);
   box-shadow: 0 20px 25px -10px rgba(26, 188, 156, 0.4);
 }
@@ -227,7 +205,7 @@
 
 /* ==================== Form Card ==================== */
 .formCard {
-  background: var(--white);
+  background: #ffffff;
   border-radius: 1rem;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   overflow: hidden;
@@ -248,7 +226,7 @@
   left: 1rem;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--primary);
+  color: #1ABC9C;
   z-index: 1;
   pointer-events: none;
   width: 1.25rem;
@@ -263,12 +241,12 @@
 .inputField {
   width: 100%;
   padding: 0.75rem 1rem 0.75rem 2.75rem;
-  border: 2px solid var(--gray);
+  border: 2px solid #e2e8f0;
   border-radius: 0.5rem;
   font-size: 0.875rem;
   transition: all 0.2s ease;
-  background: var(--white);
-  color: var(--dark);
+  background: #ffffff;
+  color: #2C3E50;
 }
 
 :global([dir="rtl"]) .inputField {
@@ -277,12 +255,12 @@
 
 .inputField:focus {
   outline: none;
-  border-color: var(--primary);
+  border-color: #1ABC9C;
   box-shadow: 0 0 0 3px rgba(26, 188, 156, 0.1);
 }
 
 .inputField:hover {
-  border-color: var(--gray-dark);
+  border-color: #94a3b8;
 }
 
 /* ==================== Password Styles ==================== */
@@ -296,7 +274,7 @@
   left: 1rem;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--primary);
+  color: #1ABC9C;
   z-index: 1;
   pointer-events: none;
   width: 1.25rem;
@@ -311,12 +289,12 @@
 .passwordInput {
   width: 100%;
   padding: 0.75rem 2.75rem 0.75rem 2.75rem;
-  border: 2px solid var(--gray);
+  border: 2px solid #e2e8f0;
   border-radius: 0.5rem;
   font-size: 0.875rem;
   transition: all 0.2s ease;
-  background: var(--white);
-  color: var(--dark);
+  background: #ffffff;
+  color: #2C3E50;
 }
 
 :global([dir="rtl"]) .passwordInput {
@@ -325,7 +303,7 @@
 
 .passwordInput:focus {
   outline: none;
-  border-color: var(--primary);
+  border-color: #1ABC9C;
   box-shadow: 0 0 0 3px rgba(26, 188, 156, 0.1);
 }
 
@@ -341,7 +319,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--gray-dark);
+  color: #94a3b8;
   transition: color 0.2s ease;
   z-index: 2;
   width: 1.5rem;
@@ -354,13 +332,13 @@
 }
 
 .passwordToggle:hover {
-  color: var(--primary);
+  color: #1ABC9C;
 }
 
 /* ==================== Alerts ==================== */
 .successAlert {
   background: #ecfdf5;
-  border-right: 4px solid var(--primary);
+  border-right: 4px solid #1ABC9C;
   border-radius: 0.5rem;
   padding: 1rem;
   margin-bottom: 1.5rem;
@@ -460,7 +438,7 @@
   display: block;
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--dark);
+  color: #2C3E50;
   margin-bottom: 0.5rem;
 }
 
@@ -477,8 +455,8 @@
 
 .saveButton {
   flex: 1;
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color: var(--white);
+  background: linear-gradient(135deg, #1ABC9C, #16a085);
+  color: #ffffff;
   font-weight: 600;
   padding: 0.75rem;
   border-radius: 0.5rem;
@@ -488,23 +466,23 @@
 }
 
 .saveButton:hover {
-  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+  background: linear-gradient(135deg, #16a085, #1ABC9C);
 }
 
 .cancelButton {
   flex: 1;
-  background: var(--gray-light);
-  color: var(--dark);
+  background: #f8fafc;
+  color: #2C3E50;
   font-weight: 600;
   padding: 0.75rem;
   border-radius: 0.5rem;
-  border: 1px solid var(--gray);
+  border: 1px solid #e2e8f0;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .cancelButton:hover {
-  background: var(--gray);
+  background: #e2e8f0;
 }
 
 /* ==================== Responsive Design ==================== */
