@@ -1,9 +1,16 @@
+// VERCEL_UPDATE: This is the i18n version with useTranslations
 'use client';
 
+import { use } from 'react';
 import { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import styles from '@/styles/pages/reports.module.css';
+
+type Props = {
+  params: Promise<{ locale: string }>;
+};
 
 // ==================== تعريف الأنواع ====================
 
@@ -200,7 +207,7 @@ const exportToPDF = async (title: string, headers: string[], data: ExportDataRow
 
 // ==================== مكونات التقارير المحاسبية ====================
 
-function SalesReport({ startDate, endDate }: { startDate: string; endDate: string }) {
+function SalesReport({ startDate, endDate, t, tCommon }: { startDate: string; endDate: string; t: (key: string) => string; tCommon: (key: string) => string }) {
   const [data, setData] = useState<SalesReportResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -222,73 +229,73 @@ function SalesReport({ startDate, endDate }: { startDate: string; endDate: strin
 
   const handleExportCSV = (): void => {
     if (!data) return;
-    const headers: string[] = ['البيان', 'القيمة'];
+    const headers: string[] = [tCommon('statement'), tCommon('value')];
     const rows: ExportDataRow[] = [
-      ['إجمالي الفواتير', data.summary.totalInvoices],
-      ['إجمالي الكمية (طن)', data.summary.totalQuantity],
-      ['إجمالي المبيعات (دج)', data.summary.totalAmount],
-      ['المبلغ المدفوع (دج)', data.summary.totalPaid],
-      ['المبلغ المتبقي (دج)', data.summary.totalRemaining],
+      [t('totalInvoices'), data.summary.totalInvoices],
+      [t('totalQuantity'), data.summary.totalQuantity],
+      [t('totalAmount'), data.summary.totalAmount],
+      [t('totalPaid'), data.summary.totalPaid],
+      [t('totalRemaining'), data.summary.totalRemaining],
     ];
     exportToCSV(rows, headers, 'sales_report');
   };
 
   const handleExportPDF = async (): Promise<void> => {
     if (!data) return;
-    const headers: string[] = ['البيان', 'القيمة'];
+    const headers: string[] = [tCommon('statement'), tCommon('value')];
     const rows: ExportDataRow[] = [
-      ['إجمالي الفواتير', data.summary.totalInvoices],
-      ['إجمالي الكمية (طن)', data.summary.totalQuantity],
-      ['إجمالي المبيعات (دج)', data.summary.totalAmount],
-      ['المبلغ المدفوع (دج)', data.summary.totalPaid],
-      ['المبلغ المتبقي (دج)', data.summary.totalRemaining],
+      [t('totalInvoices'), data.summary.totalInvoices],
+      [t('totalQuantity'), data.summary.totalQuantity],
+      [t('totalAmount'), data.summary.totalAmount],
+      [t('totalPaid'), data.summary.totalPaid],
+      [t('totalRemaining'), data.summary.totalRemaining],
     ];
-    await exportToPDF('تقرير المبيعات', headers, rows, 'sales_report');
+    await exportToPDF(t('title'), headers, rows, 'sales_report');
   };
 
   const handlePrint = (): void => {
     window.print();
   };
 
-  if (loading) return <div className={styles.loadingSmall}>جاري التحميل...</div>;
-  if (!data) return <div className={styles.emptySmall}>لا توجد بيانات</div>;
+  if (loading) return <div className={styles.loadingSmall}>{tCommon('loading')}</div>;
+  if (!data) return <div className={styles.emptySmall}>{tCommon('noData')}</div>;
 
   const summary = data.summary;
 
   return (
     <div className={styles.reportContainer}>
       <div className={styles.reportHeaderButtons}>
-        <button onClick={handlePrint} className={styles.printBtn}>🖨️ طباعة</button>
+        <button onClick={handlePrint} className={styles.printBtn}>🖨️ {tCommon('print')}</button>
         <button onClick={handleExportCSV} className={styles.exportBtnCSV}>📥 CSV</button>
         <button onClick={handleExportPDF} className={styles.exportBtnPDF}>📄 PDF</button>
       </div>
       <div className={styles.statsGrid}>
         <div className={styles.statCard}>
-          <div className={styles.statLabel}>إجمالي الفواتير</div>
+          <div className={styles.statLabel}>{t('totalInvoices')}</div>
           <div className={styles.statValue}>{summary.totalInvoices || 0}</div>
         </div>
         <div className={styles.statCard}>
-          <div className={styles.statLabel}>إجمالي الكمية (طن)</div>
+          <div className={styles.statLabel}>{t('totalQuantity')}</div>
           <div className={styles.statValue}>{(summary.totalQuantity || 0).toLocaleString()}</div>
         </div>
         <div className={styles.statCard}>
-          <div className={styles.statLabel}>إجمالي المبيعات</div>
-          <div className={styles.statValue}>{(summary.totalAmount || 0).toLocaleString()} دج</div>
+          <div className={styles.statLabel}>{t('totalAmount')}</div>
+          <div className={styles.statValue}>{(summary.totalAmount || 0).toLocaleString()} {tCommon('currency')}</div>
         </div>
         <div className={styles.statCard}>
-          <div className={styles.statLabel}>المبلغ المدفوع</div>
-          <div className={styles.statValueGreen}>{(summary.totalPaid || 0).toLocaleString()} دج</div>
+          <div className={styles.statLabel}>{t('totalPaid')}</div>
+          <div className={styles.statValueGreen}>{(summary.totalPaid || 0).toLocaleString()} {tCommon('currency')}</div>
         </div>
         <div className={styles.statCard}>
-          <div className={styles.statLabel}>المبلغ المتبقي</div>
-          <div className={styles.statValueRed}>{(summary.totalRemaining || 0).toLocaleString()} دج</div>
+          <div className={styles.statLabel}>{t('totalRemaining')}</div>
+          <div className={styles.statValueRed}>{(summary.totalRemaining || 0).toLocaleString()} {tCommon('currency')}</div>
         </div>
       </div>
     </div>
   );
 }
 
-function ProductionReport({ startDate, endDate }: { startDate: string; endDate: string }) {
+function ProductionReport({ startDate, endDate, t, tCommon }: { startDate: string; endDate: string; t: (key: string) => string; tCommon: (key: string) => string }) {
   const [data, setData] = useState<ProductionReportResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -310,85 +317,85 @@ function ProductionReport({ startDate, endDate }: { startDate: string; endDate: 
 
   const handleExportCSV = (): void => {
     if (!data) return;
-    const headers: string[] = ['البيان', 'القيمة'];
+    const headers: string[] = [tCommon('statement'), tCommon('value')];
     const rows: ExportDataRow[] = [
-      ['إجمالي الإنتاج (طن)', data.summary.totalProduction],
-      ['تكاليف المواد الخام (دج)', data.summary.totalRawMaterialsCost],
-      ['تكاليف الطاقة (دج)', data.summary.totalEnergyCost],
-      ['تكاليف العمالة (دج)', data.summary.totalLaborCost],
-      ['تكاليف الصيانة (دج)', data.summary.totalMaintenanceCost],
-      ['إجمالي التكاليف (دج)', data.summary.totalCost],
-      ['متوسط تكلفة الطن (دج)', data.summary.avgCostPerTon],
+      [t('totalProduction'), data.summary.totalProduction],
+      [t('rawMaterialsCosts'), data.summary.totalRawMaterialsCost],
+      [t('energyCosts'), data.summary.totalEnergyCost],
+      [t('laborCosts'), data.summary.totalLaborCost],
+      [t('maintenanceCosts'), data.summary.totalMaintenanceCost],
+      [t('totalCost'), data.summary.totalCost],
+      [t('costPerTon'), data.summary.avgCostPerTon],
     ];
     exportToCSV(rows, headers, 'production_report');
   };
 
   const handleExportPDF = async (): Promise<void> => {
     if (!data) return;
-    const headers: string[] = ['البيان', 'القيمة'];
+    const headers: string[] = [tCommon('statement'), tCommon('value')];
     const rows: ExportDataRow[] = [
-      ['إجمالي الإنتاج (طن)', data.summary.totalProduction],
-      ['تكاليف المواد الخام (دج)', data.summary.totalRawMaterialsCost],
-      ['تكاليف الطاقة (دج)', data.summary.totalEnergyCost],
-      ['تكاليف العمالة (دج)', data.summary.totalLaborCost],
-      ['تكاليف الصيانة (دج)', data.summary.totalMaintenanceCost],
-      ['إجمالي التكاليف (دج)', data.summary.totalCost],
-      ['متوسط تكلفة الطن (دج)', data.summary.avgCostPerTon],
+      [t('totalProduction'), data.summary.totalProduction],
+      [t('rawMaterialsCosts'), data.summary.totalRawMaterialsCost],
+      [t('energyCosts'), data.summary.totalEnergyCost],
+      [t('laborCosts'), data.summary.totalLaborCost],
+      [t('maintenanceCosts'), data.summary.totalMaintenanceCost],
+      [t('totalCost'), data.summary.totalCost],
+      [t('costPerTon'), data.summary.avgCostPerTon],
     ];
-    await exportToPDF('تقرير الإنتاج', headers, rows, 'production_report');
+    await exportToPDF(t('title'), headers, rows, 'production_report');
   };
 
   const handlePrint = (): void => {
     window.print();
   };
 
-  if (loading) return <div className={styles.loadingSmall}>جاري التحميل...</div>;
-  if (!data) return <div className={styles.emptySmall}>لا توجد بيانات</div>;
+  if (loading) return <div className={styles.loadingSmall}>{tCommon('loading')}</div>;
+  if (!data) return <div className={styles.emptySmall}>{tCommon('noData')}</div>;
 
   const summary = data.summary;
 
   return (
     <div className={styles.reportContainer}>
       <div className={styles.reportHeaderButtons}>
-        <button onClick={handlePrint} className={styles.printBtn}>🖨️ طباعة</button>
+        <button onClick={handlePrint} className={styles.printBtn}>🖨️ {tCommon('print')}</button>
         <button onClick={handleExportCSV} className={styles.exportBtnCSV}>📥 CSV</button>
         <button onClick={handleExportPDF} className={styles.exportBtnPDF}>📄 PDF</button>
       </div>
       <div className={styles.statsGrid}>
         <div className={styles.statCard}>
-          <div className={styles.statLabel}>إجمالي الإنتاج (طن)</div>
+          <div className={styles.statLabel}>{t('totalProduction')}</div>
           <div className={styles.statValue}>{(summary.totalProduction || 0).toLocaleString()}</div>
         </div>
         <div className={styles.statCard}>
-          <div className={styles.statLabel}>تكاليف المواد الخام</div>
-          <div className={styles.statValue}>{(summary.totalRawMaterialsCost || 0).toLocaleString()} دج</div>
+          <div className={styles.statLabel}>{t('rawMaterialsCosts')}</div>
+          <div className={styles.statValue}>{(summary.totalRawMaterialsCost || 0).toLocaleString()} {tCommon('currency')}</div>
         </div>
         <div className={styles.statCard}>
-          <div className={styles.statLabel}>تكاليف الطاقة</div>
-          <div className={styles.statValue}>{(summary.totalEnergyCost || 0).toLocaleString()} دج</div>
+          <div className={styles.statLabel}>{t('energyCosts')}</div>
+          <div className={styles.statValue}>{(summary.totalEnergyCost || 0).toLocaleString()} {tCommon('currency')}</div>
         </div>
         <div className={styles.statCard}>
-          <div className={styles.statLabel}>تكاليف العمالة</div>
-          <div className={styles.statValue}>{(summary.totalLaborCost || 0).toLocaleString()} دج</div>
+          <div className={styles.statLabel}>{t('laborCosts')}</div>
+          <div className={styles.statValue}>{(summary.totalLaborCost || 0).toLocaleString()} {tCommon('currency')}</div>
         </div>
         <div className={styles.statCard}>
-          <div className={styles.statLabel}>تكاليف الصيانة</div>
-          <div className={styles.statValue}>{(summary.totalMaintenanceCost || 0).toLocaleString()} دج</div>
+          <div className={styles.statLabel}>{t('maintenanceCosts')}</div>
+          <div className={styles.statValue}>{(summary.totalMaintenanceCost || 0).toLocaleString()} {tCommon('currency')}</div>
         </div>
         <div className={styles.statCard}>
-          <div className={styles.statLabel}>إجمالي التكاليف</div>
-          <div className={styles.statValue}>{(summary.totalCost || 0).toLocaleString()} دج</div>
+          <div className={styles.statLabel}>{t('totalCost')}</div>
+          <div className={styles.statValue}>{(summary.totalCost || 0).toLocaleString()} {tCommon('currency')}</div>
         </div>
         <div className={styles.statCard}>
-          <div className={styles.statLabel}>متوسط تكلفة الطن</div>
-          <div className={styles.statValueBlue}>{(summary.avgCostPerTon || 0).toLocaleString()} دج/طن</div>
+          <div className={styles.statLabel}>{t('costPerTon')}</div>
+          <div className={styles.statValueBlue}>{(summary.avgCostPerTon || 0).toLocaleString()} {tCommon('currency')}/{tCommon('ton')}</div>
         </div>
       </div>
     </div>
   );
 }
 
-function PayrollReport({ startDate, endDate }: { startDate: string; endDate: string }) {
+function PayrollReport({ startDate, endDate, t, tCommon }: { startDate: string; endDate: string; t: (key: string) => string; tCommon: (key: string) => string }) {
   const [data, setData] = useState<PayrollReportResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -410,79 +417,79 @@ function PayrollReport({ startDate, endDate }: { startDate: string; endDate: str
 
   const handleExportCSV = (): void => {
     if (!data) return;
-    const headers: string[] = ['البيان', 'القيمة'];
+    const headers: string[] = [tCommon('statement'), tCommon('value')];
     const rows: ExportDataRow[] = [
-      ['عدد الموظفين', data.summary.totalEmployees],
-      ['إجمالي الرواتب الأساسية (دج)', data.summary.totalBaseSalary],
-      ['إجمالي البدلات (دج)', data.summary.totalAllowances],
-      ['إجمالي المكافآت (دج)', data.summary.totalBonuses],
-      ['إجمالي الاستقطاعات (دج)', data.summary.totalDeductions],
-      ['صافي الرواتب (دج)', data.summary.totalNetSalary],
+      [t('totalEmployees'), data.summary.totalEmployees],
+      [t('totalBaseSalary'), data.summary.totalBaseSalary],
+      [t('totalAllowances'), data.summary.totalAllowances],
+      [t('totalBonuses'), data.summary.totalBonuses],
+      [t('totalDeductions'), data.summary.totalDeductions],
+      [t('netSalary'), data.summary.totalNetSalary],
     ];
     exportToCSV(rows, headers, 'payroll_report');
   };
 
   const handleExportPDF = async (): Promise<void> => {
     if (!data) return;
-    const headers: string[] = ['البيان', 'القيمة'];
+    const headers: string[] = [tCommon('statement'), tCommon('value')];
     const rows: ExportDataRow[] = [
-      ['عدد الموظفين', data.summary.totalEmployees],
-      ['إجمالي الرواتب الأساسية (دج)', data.summary.totalBaseSalary],
-      ['إجمالي البدلات (دج)', data.summary.totalAllowances],
-      ['إجمالي المكافآت (دج)', data.summary.totalBonuses],
-      ['إجمالي الاستقطاعات (دج)', data.summary.totalDeductions],
-      ['صافي الرواتب (دج)', data.summary.totalNetSalary],
+      [t('totalEmployees'), data.summary.totalEmployees],
+      [t('totalBaseSalary'), data.summary.totalBaseSalary],
+      [t('totalAllowances'), data.summary.totalAllowances],
+      [t('totalBonuses'), data.summary.totalBonuses],
+      [t('totalDeductions'), data.summary.totalDeductions],
+      [t('netSalary'), data.summary.totalNetSalary],
     ];
-    await exportToPDF('تقرير الرواتب', headers, rows, 'payroll_report');
+    await exportToPDF(t('title'), headers, rows, 'payroll_report');
   };
 
   const handlePrint = (): void => {
     window.print();
   };
 
-  if (loading) return <div className={styles.loadingSmall}>جاري التحميل...</div>;
-  if (!data) return <div className={styles.emptySmall}>لا توجد بيانات</div>;
+  if (loading) return <div className={styles.loadingSmall}>{tCommon('loading')}</div>;
+  if (!data) return <div className={styles.emptySmall}>{tCommon('noData')}</div>;
 
   const summary = data.summary;
 
   return (
     <div className={styles.reportContainer}>
       <div className={styles.reportHeaderButtons}>
-        <button onClick={handlePrint} className={styles.printBtn}>🖨️ طباعة</button>
+        <button onClick={handlePrint} className={styles.printBtn}>🖨️ {tCommon('print')}</button>
         <button onClick={handleExportCSV} className={styles.exportBtnCSV}>📥 CSV</button>
         <button onClick={handleExportPDF} className={styles.exportBtnPDF}>📄 PDF</button>
       </div>
       <div className={styles.statsGrid}>
         <div className={styles.statCard}>
-          <div className={styles.statLabel}>عدد الموظفين</div>
+          <div className={styles.statLabel}>{t('totalEmployees')}</div>
           <div className={styles.statValue}>{summary.totalEmployees || 0}</div>
         </div>
         <div className={styles.statCard}>
-          <div className={styles.statLabel}>إجمالي الرواتب الأساسية</div>
-          <div className={styles.statValue}>{(summary.totalBaseSalary || 0).toLocaleString()} دج</div>
+          <div className={styles.statLabel}>{t('totalBaseSalary')}</div>
+          <div className={styles.statValue}>{(summary.totalBaseSalary || 0).toLocaleString()} {tCommon('currency')}</div>
         </div>
         <div className={styles.statCard}>
-          <div className={styles.statLabel}>إجمالي البدلات</div>
-          <div className={styles.statValue}>{(summary.totalAllowances || 0).toLocaleString()} دج</div>
+          <div className={styles.statLabel}>{t('totalAllowances')}</div>
+          <div className={styles.statValue}>{(summary.totalAllowances || 0).toLocaleString()} {tCommon('currency')}</div>
         </div>
         <div className={styles.statCard}>
-          <div className={styles.statLabel}>إجمالي المكافآت</div>
-          <div className={styles.statValue}>{(summary.totalBonuses || 0).toLocaleString()} دج</div>
+          <div className={styles.statLabel}>{t('totalBonuses')}</div>
+          <div className={styles.statValue}>{(summary.totalBonuses || 0).toLocaleString()} {tCommon('currency')}</div>
         </div>
         <div className={styles.statCard}>
-          <div className={styles.statLabel}>إجمالي الاستقطاعات</div>
-          <div className={styles.statValueRed}>{(summary.totalDeductions || 0).toLocaleString()} دج</div>
+          <div className={styles.statLabel}>{t('totalDeductions')}</div>
+          <div className={styles.statValueRed}>{(summary.totalDeductions || 0).toLocaleString()} {tCommon('currency')}</div>
         </div>
         <div className={styles.statCard}>
-          <div className={styles.statLabel}>صافي الرواتب</div>
-          <div className={styles.statValueGreen}>{(summary.totalNetSalary || 0).toLocaleString()} دج</div>
+          <div className={styles.statLabel}>{t('netSalary')}</div>
+          <div className={styles.statValueGreen}>{(summary.totalNetSalary || 0).toLocaleString()} {tCommon('currency')}</div>
         </div>
       </div>
     </div>
   );
 }
 
-function TaxReport({ startDate, endDate }: { startDate: string; endDate: string }) {
+function TaxReport({ startDate, endDate, t, tCommon }: { startDate: string; endDate: string; t: (key: string) => string; tCommon: (key: string) => string }) {
   const [data, setData] = useState<TaxReportResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -504,7 +511,7 @@ function TaxReport({ startDate, endDate }: { startDate: string; endDate: string 
 
   const handleExportCSV = (): void => {
     if (!data) return;
-    const headers: string[] = ['نوع الضريبة', 'مبلغ الضريبة (دج)', 'المدفوع (دج)', 'المتبقي (دج)'];
+    const headers: string[] = [t('taxType'), t('taxAmount'), t('totalPaid'), t('totalRemaining')];
     const rows: ExportDataRow[] = data.summary.map(item => [
       item._id,
       item.totalTaxAmount,
@@ -516,29 +523,29 @@ function TaxReport({ startDate, endDate }: { startDate: string; endDate: string 
 
   const handleExportPDF = async (): Promise<void> => {
     if (!data) return;
-    const headers: string[] = ['نوع الضريبة', 'مبلغ الضريبة (دج)', 'المدفوع (دج)', 'المتبقي (دج)'];
+    const headers: string[] = [t('taxType'), t('taxAmount'), t('totalPaid'), t('totalRemaining')];
     const rows: ExportDataRow[] = data.summary.map(item => [
       item._id,
       item.totalTaxAmount,
       item.totalPaid,
       item.totalRemaining,
     ]);
-    await exportToPDF('تقرير الضرائب', headers, rows, 'tax_report');
+    await exportToPDF(t('title'), headers, rows, 'tax_report');
   };
 
   const handlePrint = (): void => {
     window.print();
   };
 
-  if (loading) return <div className={styles.loadingSmall}>جاري التحميل...</div>;
-  if (!data) return <div className={styles.emptySmall}>لا توجد بيانات</div>;
+  if (loading) return <div className={styles.loadingSmall}>{tCommon('loading')}</div>;
+  if (!data) return <div className={styles.emptySmall}>{tCommon('noData')}</div>;
 
   const summary = data.summary;
 
   return (
     <div className={styles.reportContainer}>
       <div className={styles.reportHeaderButtons}>
-        <button onClick={handlePrint} className={styles.printBtn}>🖨️ طباعة</button>
+        <button onClick={handlePrint} className={styles.printBtn}>🖨️ {tCommon('print')}</button>
         <button onClick={handleExportCSV} className={styles.exportBtnCSV}>📥 CSV</button>
         <button onClick={handleExportPDF} className={styles.exportBtnPDF}>📄 PDF</button>
       </div>
@@ -546,9 +553,9 @@ function TaxReport({ startDate, endDate }: { startDate: string; endDate: string 
         {summary.map((item, idx) => (
           <div key={idx} className={styles.statCard}>
             <div className={styles.statLabel}>{item._id}</div>
-            <div className={styles.statValue}>{(item.totalTaxAmount || 0).toLocaleString()} دج</div>
-            <div className={styles.statSmall}>مدفوع: {(item.totalPaid || 0).toLocaleString()} دج</div>
-            <div className={styles.statSmallRed}>متبقي: {(item.totalRemaining || 0).toLocaleString()} دج</div>
+            <div className={styles.statValue}>{(item.totalTaxAmount || 0).toLocaleString()} {tCommon('currency')}</div>
+            <div className={styles.statSmall}>{t('totalPaid')}: {(item.totalPaid || 0).toLocaleString()} {tCommon('currency')}</div>
+            <div className={styles.statSmallRed}>{t('totalRemaining')}: {(item.totalRemaining || 0).toLocaleString()} {tCommon('currency')}</div>
           </div>
         ))}
       </div>
@@ -558,13 +565,13 @@ function TaxReport({ startDate, endDate }: { startDate: string; endDate: string 
 
 // ==================== الصفحة الرئيسية ====================
 
-const statusClass = (status: string): string => {
+const statusClass = (status: string, t: (key: string) => string): string => {
   switch (status) {
-    case 'ممتاز': return styles.statusExcellent;
-    case 'جيد':   return styles.statusGood;
-    case 'متوسط': return styles.statusAverage;
-    case 'ضعيف':  return styles.statusPoor;
-    default:      return styles.statusDefault;
+    case t('excellent'): return styles.statusExcellent;
+    case t('good'):      return styles.statusGood;
+    case t('average'):   return styles.statusAverage;
+    case t('poor'):      return styles.statusPoor;
+    default:             return styles.statusDefault;
   }
 };
 
@@ -575,7 +582,11 @@ const scoreClass = (score: number): string => {
   return styles.scorePoor;
 };
 
-export default function ReportsPage() {
+export default function ReportsPage({ params }: Props) {
+  const { locale } = use(params);
+  const t = useTranslations('Reports');
+  const tCommon = useTranslations('Common');
+  
   const [activeTab, setActiveTab] = useState<TabType>('ai');
   const [aiData, setAiData] = useState<AIReportData | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -604,11 +615,11 @@ export default function ReportsPage() {
   }, []);
 
   const tabs: { id: TabType; label: string; icon: string }[] = [
-    { id: 'ai', label: 'التحليل الذكي', icon: '🤖' },
-    { id: 'sales', label: 'المبيعات', icon: '💰' },
-    { id: 'production', label: 'الإنتاج', icon: '🏭' },
-    { id: 'payroll', label: 'الرواتب', icon: '👥' },
-    { id: 'taxes', label: 'الضرائب', icon: '📑' },
+    { id: 'ai', label: t('aiTab'), icon: '🤖' },
+    { id: 'sales', label: t('salesTab'), icon: '💰' },
+    { id: 'production', label: t('productionTab'), icon: '🏭' },
+    { id: 'payroll', label: t('payrollTab'), icon: '👥' },
+    { id: 'taxes', label: t('taxesTab'), icon: '📑' },
   ];
 
   return (
@@ -618,17 +629,17 @@ export default function ReportsPage() {
           <div className={styles.headerRight}>
             <div className={styles.titleRow}>
               <span className={styles.titleIcon}>📊</span>
-              <h1 className={styles.title}>التقارير والتحليلات</h1>
+              <h1 className={styles.title}>{t('title')}</h1>
             </div>
-            <p className={styles.subtitle}>تحليل شامل لأداء المصنع والتقارير المالية</p>
+            <p className={styles.subtitle}>{t('subtitle')}</p>
             {lastUpdated && activeTab === 'ai' && (
-              <p className={styles.lastUpdated}>آخر تحديث للتحليل: {lastUpdated.toLocaleTimeString('ar-DZ')}</p>
+              <p className={styles.lastUpdated}>{t('lastUpdated')} {lastUpdated.toLocaleTimeString(locale === 'ar' ? 'ar-DZ' : 'en-US')}</p>
             )}
           </div>
           <div className={styles.headerButtons}>
             {activeTab === 'ai' && (
               <button onClick={fetchAIReport} disabled={loading} className={styles.refreshButton}>
-                {loading ? '⏳ جاري التحليل...' : '🔄 تحديث التقرير'}
+                {loading ? `⏳ ${t('analyzing')}` : `🔄 ${t('refresh')}`}
               </button>
             )}
           </div>
@@ -637,11 +648,11 @@ export default function ReportsPage() {
         {activeTab !== 'ai' && (
           <div className={styles.filterBar}>
             <div className={styles.filterGroup}>
-              <label className={styles.filterLabel}>من تاريخ</label>
+              <label className={styles.filterLabel}>{t('fromDate')}</label>
               <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} className={styles.filterInput} />
             </div>
             <div className={styles.filterGroup}>
-              <label className={styles.filterLabel}>إلى تاريخ</label>
+              <label className={styles.filterLabel}>{t('toDate')}</label>
               <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} className={styles.filterInput} />
             </div>
           </div>
@@ -662,8 +673,8 @@ export default function ReportsPage() {
               {loading && (
                 <div className={styles.loadingCard}>
                   <div className={styles.loadingIcon}>🤖</div>
-                  <p className={styles.loadingTitle}>جاري تحليل بيانات المصنع...</p>
-                  <p className={styles.loadingSubtitle}>الذكاء الاصطناعي يفحص جميع وحدات المصنع</p>
+                  <p className={styles.loadingTitle}>{t('analyzing')}</p>
+                  <p className={styles.loadingSubtitle}>{t('aiDescription')}</p>
                 </div>
               )}
               {!loading && aiData && (
@@ -674,16 +685,16 @@ export default function ReportsPage() {
                         <span className={styles.scoreNumber}>{aiData.overallScore}</span>
                         <span className={styles.scoreMax}>/ 100</span>
                       </div>
-                      <span className={`${styles.badge} ${statusClass(aiData.overallStatus)}`}>{aiData.overallStatus}</span>
+                      <span className={`${styles.badge} ${statusClass(aiData.overallStatus, t)}`}>{aiData.overallStatus}</span>
                     </div>
                     <div className={styles.summaryBlock}>
-                      <h2 className={styles.summaryTitle}>الملخص التنفيذي</h2>
+                      <h2 className={styles.summaryTitle}>{t('executiveSummary')}</h2>
                       <p className={styles.summaryText}>{aiData.executiveSummary}</p>
                     </div>
                   </div>
                   {aiData.topPriorities.length > 0 && (
                     <div className={styles.prioritiesCard}>
-                      <h3 className={styles.prioritiesTitle}>🚨 أولويات العمل</h3>
+                      <h3 className={styles.prioritiesTitle}>🚨 {t('topPriorities')}</h3>
                       <div className={styles.prioritiesList}>
                         {aiData.topPriorities.map((p, i) => (
                           <div key={i} className={styles.priorityItem}>
@@ -696,7 +707,7 @@ export default function ReportsPage() {
                   )}
                   <div className={styles.sectionsGrid}>
                     {aiData.sections.map((section, i) => (
-                      <div key={i} className={`${styles.sectionCard} ${statusClass(section.status)}-border`}>
+                      <div key={i} className={`${styles.sectionCard}`}>
                         <div className={styles.sectionHeader}>
                           <div className={styles.sectionTitleRow}>
                             <span className={styles.sectionIcon}>{section.icon}</span>
@@ -704,7 +715,7 @@ export default function ReportsPage() {
                           </div>
                           <div className={styles.sectionScore}>
                             <span className={`${styles.sectionScoreNum} ${scoreClass(section.score)}`}>{section.score}%</span>
-                            <span className={`${styles.badge} ${statusClass(section.status)}`}>{section.status}</span>
+                            <span className={`${styles.badge} ${statusClass(section.status, t)}`}>{section.status}</span>
                           </div>
                         </div>
                         <div className={styles.scoreBar}>
@@ -714,20 +725,20 @@ export default function ReportsPage() {
                         <div className={styles.sectionDetails}>
                           {section.highlights.length > 0 && (
                             <div>
-                              <p className={styles.detailLabelSuccess}>✅ الإيجابيات</p>
+                              <p className={styles.detailLabelSuccess}>✅ {t('highlights')}</p>
                               {section.highlights.map((h, j) => <p key={j} className={styles.detailItem}>• {h}</p>)}
                             </div>
                           )}
                           {section.issues.length > 0 && (
                             <div>
-                              <p className={styles.detailLabelDanger}>⚠️ المشاكل</p>
+                              <p className={styles.detailLabelDanger}>⚠️ {t('issues')}</p>
                               {section.issues.map((issue, j) => <p key={j} className={styles.detailItem}>• {issue}</p>)}
                             </div>
                           )}
                         </div>
                         {section.recommendations.length > 0 && (
                           <div className={styles.recommendations}>
-                            <p className={styles.detailLabelWarning}>🔧 التوصيات</p>
+                            <p className={styles.detailLabelWarning}>🔧 {t('recommendations')}</p>
                             {section.recommendations.map((r, j) => <p key={j} className={styles.detailItem}>• {r}</p>)}
                           </div>
                         )}
@@ -736,7 +747,7 @@ export default function ReportsPage() {
                   </div>
                   {aiData.forecast && (
                     <div className={styles.forecastCard}>
-                      <h3 className={styles.forecastTitle}>🔮 التوقعات المستقبلية</h3>
+                      <h3 className={styles.forecastTitle}>🔮 {t('forecast')}</h3>
                       <p className={styles.forecastText}>{aiData.forecast}</p>
                     </div>
                   )}
@@ -745,15 +756,15 @@ export default function ReportsPage() {
               {!loading && !aiData && (
                 <div className={styles.emptyState}>
                   <div className={styles.emptyIcon}>📊</div>
-                  <p className={styles.emptyText}>اضغط "تحديث التقرير" لبدء التحليل</p>
+                  <p className={styles.emptyText}>{t('clickToAnalyze')}</p>
                 </div>
               )}
             </>
           )}
-          {activeTab === 'sales' && <SalesReport startDate={startDate} endDate={endDate} />}
-          {activeTab === 'production' && <ProductionReport startDate={startDate} endDate={endDate} />}
-          {activeTab === 'payroll' && <PayrollReport startDate={startDate} endDate={endDate} />}
-          {activeTab === 'taxes' && <TaxReport startDate={startDate} endDate={endDate} />}
+          {activeTab === 'sales' && <SalesReport startDate={startDate} endDate={endDate} t={t} tCommon={tCommon} />}
+          {activeTab === 'production' && <ProductionReport startDate={startDate} endDate={endDate} t={t} tCommon={tCommon} />}
+          {activeTab === 'payroll' && <PayrollReport startDate={startDate} endDate={endDate} t={t} tCommon={tCommon} />}
+          {activeTab === 'taxes' && <TaxReport startDate={startDate} endDate={endDate} t={t} tCommon={tCommon} />}
         </div>
       </div>
     </div>
