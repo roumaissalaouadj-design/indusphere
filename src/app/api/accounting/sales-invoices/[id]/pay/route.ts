@@ -21,7 +21,7 @@ export async function POST(
     const { id } = await params;
     const body = await request.json();
     const { amount, paymentDate, paymentMethod, reference, notes } = body;
-    const userId = token.sub;
+    const userId = session.user.id;
 
     if (!amount || amount <= 0) {
       return NextResponse.json({ success: false, message: 'المبلغ المدفوع غير صحيح' }, { status: 400 });

@@ -63,7 +63,8 @@ export async function POST(request: NextRequest) {
     await connectDB();
 
     const body = await request.json();
-    const userId = token.sub;
+    // ✅ التعديل هنا: استخدام session.user.id بدلاً من token.sub
+    const userId = session.user.id;
 
     const employee = await PayrollEmployee.findById(body.employeeId);
     if (!employee) {

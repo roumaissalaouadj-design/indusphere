@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
     await connectDB();
 
     const body = await request.json();
-    const userId = token.sub;
+    const userId = session.user.id;
 
     const transactions = await TaxTransaction.aggregate([
       {
