@@ -101,12 +101,12 @@ export default function ActivatePage({ params }: Props) {
     return (
       <div className="w-full max-w-2xl">
         <div className={`text-center ${styles.landingCard}`}>
-          {/* ✅ الشعار داخل الإطار الأخضر */}
-          <div className={`inline-flex items-center justify-center w-28 h-28 bg-gradient-to-br from-[#1ABC9C] to-[#16a085] rounded-3xl shadow-2xl mb-6 ${styles.iconPulse}`}>
+          {/* ✅ الشعار باستخدام CSS Modules */}
+          <div className={`${styles.logoContainer} ${styles.logoContainerLarge} ${styles.iconPulse}`}>
             <img 
               src="/indusphere-logo.png" 
               alt="Indusphere Logo"
-              className="w-16 h-16 object-contain"
+              className={`${styles.logoImage} ${styles.logoImageLarge}`}
             />
           </div>
 
@@ -118,34 +118,34 @@ export default function ActivatePage({ params }: Props) {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/15 transition-all duration-300">
-              <div className="w-14 h-14 bg-[#1ABC9C]/20 rounded-xl flex items-center justify-center mx-auto mb-4">
-                <Shield className="w-7 h-7 text-[#1ABC9C]" />
+            <div className={styles.featureCard}>
+              <div className={styles.featureIconWrapper}>
+                <Shield className={styles.featureIcon} />
               </div>
-              <h3 className="text-white font-semibold text-lg mb-2">{t('secureTitle')}</h3>
-              <p className="text-gray-400 text-sm leading-relaxed">{t('secureDesc')}</p>
+              <h3 className={styles.featureTitle}>{t('secureTitle')}</h3>
+              <p className={styles.featureDesc}>{t('secureDesc')}</p>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/15 transition-all duration-300">
-              <div className="w-14 h-14 bg-[#1ABC9C]/20 rounded-xl flex items-center justify-center mx-auto mb-4">
-                <Award className="w-7 h-7 text-[#1ABC9C]" />
+            <div className={styles.featureCard}>
+              <div className={styles.featureIconWrapper}>
+                <Award className={styles.featureIcon} />
               </div>
-              <h3 className="text-white font-semibold text-lg mb-2">{t('supportTitle')}</h3>
-              <p className="text-gray-400 text-sm leading-relaxed">{t('supportDesc')}</p>
+              <h3 className={styles.featureTitle}>{t('supportTitle')}</h3>
+              <p className={styles.featureDesc}>{t('supportDesc')}</p>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/15 transition-all duration-300">
-              <div className="w-14 h-14 bg-[#1ABC9C]/20 rounded-xl flex items-center justify-center mx-auto mb-4">
-                <Rocket className="w-7 h-7 text-[#1ABC9C]" />
+            <div className={styles.featureCard}>
+              <div className={styles.featureIconWrapper}>
+                <Rocket className={styles.featureIcon} />
               </div>
-              <h3 className="text-white font-semibold text-lg mb-2">{t('quickStartTitle')}</h3>
-              <p className="text-gray-400 text-sm leading-relaxed">{t('quickStartDesc')}</p>
+              <h3 className={styles.featureTitle}>{t('quickStartTitle')}</h3>
+              <p className={styles.featureDesc}>{t('quickStartDesc')}</p>
             </div>
           </div>
 
           <button
             onClick={() => setShowForm(true)}
-            className="px-8 py-4 bg-gradient-to-r from-[#1ABC9C] to-[#16a085] hover:from-[#16a085] hover:to-[#1ABC9C] text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-xl flex items-center justify-center gap-3 mx-auto"
+            className={styles.primaryButton}
           >
             <span className="text-lg">{t('startActivation')}</span>
             <ArrowRight className="w-5 h-5" />
@@ -165,12 +165,12 @@ export default function ActivatePage({ params }: Props) {
   return (
     <div className="w-full max-w-md">
       <div className="text-center mb-8">
-        {/* ✅ الشعار داخل الإطار الأخضر */}
-        <div className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-[#1ABC9C] to-[#16a085] rounded-2xl shadow-lg mb-4">
+        {/* ✅ الشعار باستخدام CSS Modules */}
+        <div className={`${styles.logoContainer} ${styles.logoContainerMedium}`}>
           <img 
             src="/indusphere-logo.png" 
             alt="Indusphere Logo"
-            className="w-14 h-14 object-contain"
+            className={`${styles.logoImage} ${styles.logoImageMedium}`}
           />
         </div>
         <h1 className="text-3xl font-bold text-white mb-2">{t('title')}</h1>
