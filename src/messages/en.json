@@ -133,7 +133,11 @@
   "lastUpdated": "Last Updated",
   "fromDate": "From Date",
   "toDate": "To Date",
-  "clickToAnalyze": "Click 'Refresh Report' to start analysis"
+  "clickToAnalyze": "Click 'Refresh Report' to start analysis",
+  "excellent": "Excellent",
+  "good": "Good",
+  "average": "Average",
+  "poor": "Poor"
 },
   "Settings": {
     "title": "Settings",

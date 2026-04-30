@@ -133,7 +133,11 @@
   "lastUpdated": "آخر تحديث",
   "fromDate": "من تاريخ",
   "toDate": "إلى تاريخ",
-  "clickToAnalyze": "اضغط 'تحديث التقرير' لبدء التحليل"
+  "clickToAnalyze": "اضغط 'تحديث التقرير' لبدء التحليل",
+  "excellent": "ممتاز",
+"good": "جيد",
+"average": "متوسط",
+"poor": "ضعيف"
 },
   "Settings": {
     "title": "الإعدادات",

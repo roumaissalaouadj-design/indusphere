@@ -133,7 +133,11 @@
   "lastUpdated": "Dernière mise à jour",
   "fromDate": "Du",
   "toDate": "Au",
-  "clickToAnalyze": "Cliquez sur 'Actualiser le rapport' pour commencer l'analyse"
+  "clickToAnalyze": "Cliquez sur 'Actualiser le rapport' pour commencer l'analyse",
+  "excellent": "Excellent",
+  "good": "Bon",
+  "average": "Moyen",
+  "poor": "Faible"
 },
   "Settings": {
     "title": "Paramètres",
