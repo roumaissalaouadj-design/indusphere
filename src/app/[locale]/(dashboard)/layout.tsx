@@ -32,7 +32,7 @@ function DashboardContent({ children, params }: { children: React.ReactNode; par
           [isRTL ? 'marginRight' : 'marginLeft']: sidebarWidth,
         }}
       >
-        <Header params={params} />
+        <Header />
       </div>
 
       <div className={styles.body}>
