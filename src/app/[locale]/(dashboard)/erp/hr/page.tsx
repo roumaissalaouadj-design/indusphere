@@ -1,4 +1,3 @@
-// src/app/[locale]/(dashboard)/erp/hr/page.tsx
 'use client';
 
 import { useState } from 'react';
@@ -9,9 +8,13 @@ import SalaryPaymentsTab from '@/components/hr/SalaryPaymentsTab';
 import EmployeeEvaluationsTab from '@/components/hr/EmployeeEvaluationsTab';
 import styles from '@/styles/pages/hr.module.css';
 
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
 type TabType = 'employees' | 'structure' | 'payments' | 'evaluations';
 
-export default function HRPage() {
+export default function HRPage({ params }: Props) {
   const t = useTranslations('ERP');
   const [activeTab, setActiveTab] = useState<TabType>('employees');
 
@@ -50,10 +53,10 @@ export default function HRPage() {
 
         {/* Tab Content */}
         <div className={styles.tabContent}>
-          {activeTab === 'employees' && <EmployeesTab />}
+          {activeTab === 'employees' && <EmployeesTab params={params} />}
           {activeTab === 'structure' && <SalaryStructureTab />}
-          {activeTab === 'payments' && <SalaryPaymentsTab />}
-          {activeTab === 'evaluations' && <EmployeeEvaluationsTab />}
+          {activeTab === 'payments' && <SalaryPaymentsTab params={params} />}
+          {activeTab === 'evaluations' && <EmployeeEvaluationsTab params={params} />}
         </div>
 
       </div>
